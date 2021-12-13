@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('login', function () {
     return view('login');
 })->name('login');
+
+route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
+route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.login.callback');
 
 Route::get('checkout', function () {
     return view('checkout');
