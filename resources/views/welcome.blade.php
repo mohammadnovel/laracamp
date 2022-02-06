@@ -330,10 +330,10 @@
         <div class="row text-center pb-70">
             <div class="col-lg-12 col-12 header-wrap">
                 <p class="story">
-                    SUCCESS STUDENTS
+                    TESTIMONI
                 </p>
                 <h2 class="primary-header">
-                    We Really Love Laracamp
+                    We Really Love Trip On Vetours
                 </h2>
             </div>
         </div>
@@ -344,7 +344,7 @@
                         <div class="item-review">
                             <img src="{{ asset('images/stars.svg') }}" alt="">
                             <p class="message">
-                                I was not really into code but after they teach me how to train my logic then I was really fall in love with code
+                                Thank you Vetours, the service is very satisfying. Really recommended anyway!!
                             </p>
                             <div class="user">
                                 <img src="{{ asset('images/fanny_photo.png') }}" class="photo" alt="">
@@ -363,7 +363,7 @@
                         <div class="item-review">
                             <img src="{{ asset('images/stars.svg') }}" alt="">
                             <p class="message">
-                                Code is really important if we want to build a company and strike to the win
+                                We are very satisfied with Vetours' service, especially for its flexible time.
                             </p>
                             <div class="user">
                                 <img src="{{ asset('images/angga.png') }}" class="photo" alt="">
@@ -382,7 +382,7 @@
                         <div class="item-review">
                             <img src="{{ asset('images/stars.svg') }}" alt="">
                             <p class="message">
-                                My background is design and art but I do really love how to make my design working in the development phase
+                                Vetours services are really OK, you don't regret using Vetours services !!.
                             </p>
                             <div class="user">
                                 <img src="{{ asset('images/beatrice.png') }}" class="photo" alt="">
@@ -401,7 +401,7 @@
                 <div class="row copyright">
                     <div class="col-lg-12 col-12">
                         <p>
-                            All Rights Reserved. Copyright Laracamp BWA Indonesia.
+                            All Rights Reserved. Copyright Vetours.
                         </p>
                     </div>
                 </div>

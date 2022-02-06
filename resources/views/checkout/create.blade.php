@@ -6,10 +6,10 @@
         <div class="row text-center pb-70">
             <div class="col-lg-12 col-12 header-wrap">
                 <p class="story">
-                    YOUR FUTURE CAREER
+                    Traveling alone will not make you lonely,
                 </p>
                 <h2 class="primary-header">
-                    Start Invest Today
+                    in fact you may find your true love.
                 </h2>
             </div>
         </div>

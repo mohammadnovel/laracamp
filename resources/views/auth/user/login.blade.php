@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <title>Laracamp by BuildWith Angga</title>
+    <title>Vetours</title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         <div class="right">
             <img src="{{ asset('images/logo.png') }}" class="logo" alt="">
             <h1 class="header-third">
-                Start Today
+                Trip Today
             </h1>
             <p class="subheader">
                 Because tomorrow become never
