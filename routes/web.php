@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
 /*
@@ -38,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     //dashboard
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('dashboard/checkout/invoice/{checkout}', [CheckoutController::class, 'invoice'])->name('user.checkout.invoice');
+
+    //management
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 
 });
 // Route::get('/dashboard', function () {
