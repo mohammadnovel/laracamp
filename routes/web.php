@@ -24,6 +24,10 @@ Route::get('login', function () {
     return view('login');
 })->name('login');
 
+Route::get('login/admin', function () {
+    return view('auth.user.login');
+})->name('login.admin');
+
 //socialite resource
 route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
 route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.login.callback');
