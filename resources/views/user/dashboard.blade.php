@@ -9,7 +9,7 @@
                     DASHBOARD
                 </p>
                 <h2 class="primary-header ">
-                    My Bootcamps
+                    My Journey Visits
                 </h2>
             </div>
         </div>

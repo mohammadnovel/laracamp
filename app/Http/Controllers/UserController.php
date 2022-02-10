@@ -156,6 +156,7 @@ class UserController extends Controller
         $user = User::whereEmail($data['email'])->first();
         if (!$user) {
            $user = User::create($data);
+           $user->assignRole('traveler');
            Mail::to($user->email)->send(new AfterRegister($user));
         }
         Auth::login($user, true);
