@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-6 col-12 text-center">
                         <a href="#">
-                            <img src="{{ asset('images/banner.png') }}" class="img-fluid" alt="">
+                            <img src="{{ asset('images/camping_chilld.jpeg') }}" class="img-fluid" alt="" style="border-radius: 15px 50px; ">
                         </a>
                     </div>
                 </div>
