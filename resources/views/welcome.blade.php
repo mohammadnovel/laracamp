@@ -193,15 +193,15 @@
                     <div class="col-lg-6 col-12">
                         <div class="table-pricing paket-gila">
                             <p class="story text-center">
-                                GILA BELAJAR
+                                Fun Trip Javanaspa
                             </p>
                             <h1 class="price text-center">
-                                $280K
+                                RP. 280K
                             </h1>
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Pro Techstack Kit
+                                    Tenda kapasitas 4-6 orang
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -209,7 +209,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    iMac Pro 2021 & Display
+                                    Transport Jakarta – Javanaspa
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -217,7 +217,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    1-1 Mentoring Program
+                                    Makan 3x
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -225,7 +225,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Final Project Certificate
+                                    Sleeping bag
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -233,7 +233,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Offline Course Videos
+                                    Matras
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -241,7 +241,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Future Job Opportinity
+                                    Dokumentasi foto
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -249,7 +249,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Premium Design Kit
+                                    Guide
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -257,13 +257,13 @@
                             <div class="item-benefit-pricing">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Website Builder
+                                    Jodoh Bila Beruntung
                                 </p>
                                 <div class="clear"></div>
                             </div>
                             <p>
-                                <a href="{{ route('checkout.create','gila-belajar') }}" class="btn btn-master btn-primary w-100 mt-3">
-                                    Take This Plan
+                                <a href="{{ route('checkout.create','fun-camp-javanaspa') }}" class="btn btn-master btn-primary w-100 mt-3">
+                                    Take This Tour
                                 </a>
                             </p>
                         </div>
@@ -271,15 +271,15 @@
                     <div class="col-lg-6 col-12">
                         <div class="table-pricing paket-biasa">
                             <p class="story text-center">
-                                BARU MULAI
+                                Trip Bromo
                             </p>
                             <h1 class="price text-center">
-                                $140K
+                                RP. 140.000K
                             </h1>
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    1-1 Mentoring Program
+                                    Transport Jakarta – Bromo BC
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -287,7 +287,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Final Project Certificate
+                                    Jeep 4x4
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -295,7 +295,7 @@
                             <div class="item-benefit-pricing mb-4">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Offline Course Videos
+                                    Dokumentasi foto
                                 </p>
                                 <div class="clear"></div>
                                 <div class="divider"></div>
@@ -303,13 +303,13 @@
                             <div class="item-benefit-pricing">
                                 <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                 <p>
-                                    Future Job Opportinity
+                                    Guide
                                 </p>
                                 <div class="clear"></div>
                             </div>
                             <p>
                                 <a href="{{ route('checkout.create', 'baru-mulai') }}" class="btn btn-master btn-secondary w-100 mt-3">
-                                    Start With This Plan
+                                    Start With This Tour
                                 </a>
                             </p>
                         </div>
