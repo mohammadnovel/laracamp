@@ -16,51 +16,51 @@ class CampBenefitTableSeeder extends Seeder
         $campBenefits = [
             [
                 'camp_id' => 1,
-                'name' => 'Pro Techstack Kit'
+                'name' => 'Tenda'
             ],
             [
                 'camp_id' => 1,
-                'name' => 'iMac Pro 2021 & Display'
+                'name' => 'Makan 2x'
             ],
             [
                 'camp_id' => 1,
-                'name' => '1-1 Mentoring Program'
+                'name' => 'Dokumentasi'
             ],
             [
                 'camp_id' => 1,
-                'name' => 'Final Project Certificate'
+                'name' => 'Penjemputan'
             ],
             [
                 'camp_id' => 1,
-                'name' => 'Offline Course Videos'
+                'name' => 'P3K'
             ],
             [
                 'camp_id' => 1,
-                'name' => 'Future Job Opportinity'
+                'name' => 'Doorprize'
             ],
             [
                 'camp_id' => 1,
-                'name' => 'Premium Design Kit'
+                'name' => 'Jodoh Bila Beruntung'
             ],
             [
                 'camp_id' => 1,
-                'name' => 'Website Builder'
+                'name' => 'Guide'
             ],
             [
                 'camp_id' => 1,
-                'name' => ''
+                'name' => 'Music'
             ],
             [
                 'camp_id' => 2,
-                'name' => '1-1 Mentoring Program'
+                'name' => 'Jeep Bromo'
             ],
             [
                 'camp_id' => 2,
-                'name' => 'Final Project Certificate'
+                'name' => 'Makan 2x'
             ],
             [
                 'camp_id' => 2,
-                'name' => 'Offline Course Videos'
+                'name' => 'Dokumentasi'
             ],
 
         ];

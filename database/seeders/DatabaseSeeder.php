@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             CampTableSeeder::class,
             CampBenefitTableSeeder::class,
             AdminUserTableSeeder::class,
-            CreateAdminUserTableSeeder::class,
             PermissionTableSeeder::class,
         ]);
     }

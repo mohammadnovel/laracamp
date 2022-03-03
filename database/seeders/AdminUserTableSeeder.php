@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\App;
-
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class AdminUserTableSeeder extends Seeder
 {
     /**
@@ -15,12 +15,19 @@ class AdminUserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'admin',
-            'email' => 'admin@laracamp.com',
-            'email_verified_at' => date('Y-m-d H:i:s', time()),
-            'password' => \bcrypt('password'),
-            'is_admin' => true
+        $user = User::create([
+            'name' => 'Novel Ganteng', 
+            'email' => 'siadmin@mailinator.com',
+            'password' => bcrypt('Amigos12'),
+            'is_admin' => 1
         ]);
+    
+        $role = Role::create(['name' => 'Admin']);
+     
+        $permissions = Permission::pluck('id','id')->all();
+   
+        $role->syncPermissions($permissions);
+     
+        $user->assignRole([$role->id]);
     }
 }
