@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Discount;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Admin\Discount\Store;
 class DiscountController extends Controller
 {
     /**
@@ -36,7 +36,9 @@ class DiscountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $discount = Discount::create($request->all());
+        $request->session()->flash('success', 'New Voucher Discount has been created');
+        return redirect(route('admin.discount.index'));
     }
 
     /**

@@ -14,12 +14,12 @@
                         @csrf
                         <div class="form-group mb-4">
                             <label class="form-label">Name</label>
-                            <input type="text" name="name" id="" class="form-control" />
+                            <input type="text" name="name" id="" class="form-control" required/>
                         </div>
 
                         <div class="form-group mb-4">
                             <label class="form-label">Code</label>
-                            <input type="text" name="Code" id="" class="form-control" />
+                            <input type="text" name="Code" id="" class="form-control" required/>
                         </div>
 
                         <div class="form-group mb-4">
@@ -31,8 +31,7 @@
 
                         <div class="form-group p-4">
                             <label class="form-label">Type Discount</label>
-                            <select class="form-control form-control-sm">
-                                <option value="">Open this select menu</option>
+                            <select class="form-control form-control-sm" name="type">
                                 <option value="nominal">Nominal</option>
                                 <option value="percentage">Percentage</option>
                             </select>
@@ -40,7 +39,7 @@
 
                         <div class="form-group p-4">
                             <label class="form-label">Value</label>
-                            <input type="number" min="1" max="100" name="value" id="" class="form-control" />
+                            <input type="number" min="1" max="100" name="value" id="" class="form-control" required />
                         </div>
 
                         <div class="form-group p-4 ">

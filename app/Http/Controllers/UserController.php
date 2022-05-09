@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use Auth;
+use Spatie\Permission\Models\Role;  
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Mail;
+use Illuminate\Support\Arr;
 use App\Mail\User\AfterRegister;
 
 class UserController extends Controller

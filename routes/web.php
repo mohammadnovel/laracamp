@@ -39,7 +39,9 @@ route::get('auth/google/callback', [UserController::class, 'handleProviderCallba
 // midtrans route
 Route::get('payment/success', [CheckoutController::class, 'midtransCallback']);
 Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
-
+//management
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
 Route::middleware(['auth'])->group(function () {
     //checkout
     Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
@@ -50,9 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('dashboard/checkout/invoice/{checkout}', [CheckoutController::class, 'invoice'])->name('user.checkout.invoice');
 
-    //management
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
+    
 
     Route::prefix('user/dashboard')->namespace('User')->name('user.')->group(function(){
         Route::get('/', [UserDashboard::class, 'index'])->name('dashboard');
