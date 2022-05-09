@@ -8,21 +8,22 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="#">
                 <!-- Logo icon -->
                 <b class="logo-icon">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="{{ asset('main/images/logo.png') }}" alt="homepage" class="dark-logo" />
+                    <img src="{{ asset('main/images/ic_globe-1.png') }}" alt="homepage" class="dark-logo" />
                     <!-- Light Logo icon -->
-                    <img src="{{ asset('main/images/logo.png') }}" alt="homepage"
-                        class="light-logo" width="60%" />
+                    <img src="{{ asset('main/images/ic_globe-1.png') }}" alt="homepage"
+                        class="light-logo" width="30%" />
+                        
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <h3 class="text-white mt-3">GLOBAL GI</h3>
+                    <h3 class="text-white mt-3">Vetours</h3>
                 </span>
             </a>
             <!-- ============================================================== -->

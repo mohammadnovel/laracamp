@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,7 @@ Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
 //management
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
+
 Route::middleware(['auth'])->group(function () {
     //checkout
     Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
@@ -59,7 +61,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function (){
-        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('index');
+        Route::resource('permission', PermissionController::class);
 
         //admin checkout
         Route::post('checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
