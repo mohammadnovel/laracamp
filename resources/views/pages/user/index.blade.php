@@ -7,8 +7,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <h4 class="card-title">{{ module_title($module) }}</h4>
-                                <h6 class="card-subtitle">Manage {{ module_title($module) }}</h6>
+                                <h4 class="card-title">{{ ucfirst($module) }}</h4>
+                                <h6 class="card-subtitle">Manage {{ ucfirst($module) }}</h6>
                             </div>
                             @can($module . '.create')
                                 <div class="col-md-4" align="right">
@@ -26,7 +26,6 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Role</th>
-                                        <th>Company</th>
                                         <th width="25%">Action</th>
                                     </tr>
                                 </thead>
@@ -62,10 +61,6 @@
                 {
                     data: 'role',
                     name: 'role'
-                },
-                {
-                    data: 'company',
-                    name: 'company'
                 },
                 {
                     data: 'action',

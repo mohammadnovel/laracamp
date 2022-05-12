@@ -96,7 +96,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by goorita
+                All Rights Reserved by Vetours
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

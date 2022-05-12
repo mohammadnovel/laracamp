@@ -7,8 +7,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8">
-                            <h4 class="card-title">{{ module_title($module) }}</h4>
-                            <h6 class="card-subtitle">Manage {{ module_title($module) }}</h6>
+                            <h4 class="card-title">{{ ucfirst($module) }}</h4>
+                            <h6 class="card-subtitle">Manage {{ ucfirst($module) }}</h6>
                         </div>
                         <div class="col-md-4" align="right">
                             <a href="{{ route($route.'.index') }}" class="btn btn-danger btn-lg"><i class="m-r-10 mdi mdi-backspace"></i>Back</a>

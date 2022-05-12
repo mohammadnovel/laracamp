@@ -39,10 +39,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if (!$request->user()->can($this->module . '.view')) return notPermited();
+        // if (!$request->user()->can($this->module . '.view')) return notPermited();
 
         if ($request->ajax()) {
-            $data = $this->repository->with('company');
+            $data = $this->repository->all();
 
             return DataTables::of($data)
                 ->addColumn('action', function ($data) use ($request) {
@@ -66,12 +66,10 @@ class UserController extends Controller
                 ->addColumn('role', function ($data) {
                     return '<label class="label label-info">' . $data->roles()->pluck('name')->implode('</label> <label class="label label-info">') . '</label>';
                 })
-                ->addColumn('company', function ($data) {
-                    return data_get($data, 'company.name');
-                })
                 ->rawColumns(['action', 'role'])
                 ->make();
         }
+        // dd($this->module);
         return view('pages.' . $this->module . '.index');
     }
 
@@ -82,7 +80,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        if (!$request->user()->can($this->module . '.create')) return notPermited();
+        // if (!$request->user()->can($this->module . '.create')) return notPermited();
 
         $data['form'] = $this->formBuilder->create($this->form, [
             'method' => 'POST',
@@ -100,7 +98,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        if (!$request->user()->can($this->module . '.create')) return notPermited();
+        // if (!$request->user()->can($this->module . '.create')) return notPermited();
 
         try {
             DB::transaction(function () use ($request) {
@@ -127,7 +125,7 @@ class UserController extends Controller
      */
     public function show(Request $request, $id)
     {
-        if (!$request->user()->can($this->module . '.view')) return notPermited();
+        // if (!$request->user()->can($this->module . '.view')) return notPermited();
 
         $get = $this->repository->find($id);
         $data['detail'] = $get;
@@ -144,7 +142,7 @@ class UserController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        if (!$request->user()->can($this->module . '.update')) return notPermited();
+        // if (!$request->user()->can($this->module . '.update')) return notPermited();
 
         $get = $this->repository->find($id);
         $get->password = "";
@@ -167,7 +165,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        if (!$request->user()->can($this->module . '.update')) return notPermited();
+        // if (!$request->user()->can($this->module . '.update')) return notPermited();
 
         try {
             DB::transaction(function () use ($request, $id) {
@@ -198,13 +196,13 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if (!$request->user()->can($this->module . '.delete')) return notPermited();
+        // if (!$request->user()->can($this->module . '.delete')) return notPermited();
 
         try {
             DB::transaction(function () use ($id) {
                 $get = $this->repository->find($id);
                 $get->delete($id);
-                gilog("Delete " . $this->module, $get, ['notes' => @request('notes')]);
+                // gilog("Delete " . $this->module, $get, ['notes' => @request('notes')]);
             });
             $data['message'] = 'Success delete ' . $this->module;
             $status = 200;

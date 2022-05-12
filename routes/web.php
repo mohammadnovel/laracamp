@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
@@ -41,8 +41,6 @@ route::get('auth/google/callback', [UserController::class, 'handleProviderCallba
 Route::get('payment/success', [CheckoutController::class, 'midtransCallback']);
 Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
 //management
-Route::resource('roles', RoleController::class);
-Route::resource('users', UserController::class);
 
 Route::middleware(['auth'])->group(function () {
     //checkout
@@ -63,6 +61,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function (){
         Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('index');
         Route::resource('permission', PermissionController::class);
+        Route::resource('role', RoleController::class);
+        Route::resource('user', UserController::class);
+
 
         //admin checkout
         Route::post('checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
