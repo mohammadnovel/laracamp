@@ -5,9 +5,9 @@ return [
     /*
      * Default view used to render Javascript validation code
      *
-     * Supported: 'jsvalidation::bootstrap', 'jsvalidation::bootstrap4', 'jsvalidation::bootstrap5', 'jsvalidation::uikit'
+     * Supported: 'jsvalidation::bootstrap', 'jsvalidation::bootstrap4'
      */
-    'view' => 'jsvalidation::bootstrap',
+    'view' => 'jsvalidation::bootstrap4',
 
     /*
      * Default JQuery selector find the form to be validated.
@@ -39,15 +39,4 @@ return [
      */
     'remote_validation_field' => '_jsvalidation',
 
-    /*
-     * Whether to escape all validation messages with htmlentities.
-     */
-    'escape' => true,
-
-    /*
-     * Set a default value for the validate ignore property.
-     *
-     * See https://jqueryvalidation.org/validate/#ignore
-     */
-    'ignore' => ":hidden, [contenteditable='true']",
 ];
