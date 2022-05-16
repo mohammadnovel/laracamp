@@ -29,6 +29,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('tour-list', [HomeController::class, 'tours'])->name('tour-list');
+
 Route::get('login', function () {
     return view('login');
 })->name('login');

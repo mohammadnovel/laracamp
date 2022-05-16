@@ -19,4 +19,9 @@ class HomeController extends Controller
                 break;
         }
     }
+
+    public function tours()
+    {
+        return view('main.tour-list');
+    }
 }
