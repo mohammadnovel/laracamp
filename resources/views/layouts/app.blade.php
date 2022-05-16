@@ -2,19 +2,31 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
+    <title>Vetours - amazing trip</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('frontend/css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/animate.css')}}">
 
-    <title>Vetours</title>
+    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/magnific-popup.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/aos.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/ionicons.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap-datepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/jquery.timepicker.css')}}">
+
+
+    <link rel="stylesheet" href="{{asset('frontend/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/icomoon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 </head>
 
 <body>
@@ -22,12 +34,30 @@
     @include('components.navbar')
 
     @yield('content')
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
+    <!-- Footer -->
+    @include('components.footer')
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  
+    <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
+    <script src="{{asset('frontend/js/popper.min.js')}}"></script>
+    <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.easing.1.3.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.stellar.min.js')}}"></script>
+    <script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('frontend/js/aos.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.animateNumber.min.js')}}"></script>
+    <script src="{{asset('frontend/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.timepicker.min.js')}}"></script>
+    <script src="{{asset('frontend/js/scrollax.min.js')}}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{{asset('frontend/js/google-map.js')}}"></script>
+    <script src="{{asset('frontend/js/main.js')}}"></script>
+      
 </body>
 
 </html>
