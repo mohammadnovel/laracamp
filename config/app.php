@@ -167,7 +167,6 @@ return [
          * Package Service Providers...
          */
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
-        Yajra\DataTables\EditorServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
 
@@ -180,7 +179,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
-        App\Providers\SaldoServiceProvider::class,
 
     ],
 
