@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->text('description')->nullable();
             $table->datetime('publish_at')->nullable();
             $table->string('image')->nullable();
-            $table->string('thumbnail')->nullable()->after('image');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
