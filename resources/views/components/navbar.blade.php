@@ -11,8 +11,15 @@
             <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About</a></li>
             <li class="nav-item"><a href="{{route('tour-list')}}" class="nav-link">Tour</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            <li class="nav-item">
+                @auth
+                <span class="nav-link border-yellow-200">
+                Hi, {{Auth::user()->name}}
+                </span>
+                @endauth
+            </li>
         </ul>
         </div>
+        
     </div>
 </nav>

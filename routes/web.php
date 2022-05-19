@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UserController as Users;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\User\CheckoutController;
@@ -41,8 +42,8 @@ Route::get('login/admin', function () {
 })->name('login.admin');
 
 //socialite resource
-route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
-route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.login.callback');
+route::get('sign-in-google', [Users::class, 'google'])->name('user.login.google');
+route::get('auth/google/callback', [Users::class, 'handleProviderCallback'])->name('user.login.callback');
 
 // midtrans route
 Route::get('payment/success', [CheckoutController::class, 'midtransCallback']);
