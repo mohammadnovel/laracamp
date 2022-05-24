@@ -57,23 +57,14 @@
                     </li>
                 @endcan
 
-                @can('article.view')
+                {{-- @can('article.view')
                     <li class="sidebar-item">
                         <a href="{{ route('admin.article.index') }}" class="sidebar-link">
                             <i class="mdi mdi-note"></i>
                             <span class="hide-menu"> Article </span>
                         </a>
                     </li>
-                @endcan
-
-                @can('event.view')
-                    <li class="sidebar-item">
-                        <a href="{{ route('admin.event.index') }}" class="sidebar-link">
-                            <i class="mdi mdi-calendar"></i>
-                            <span class="hide-menu"> Event </span>
-                        </a>
-                    </li>
-                @endcan
+                @endcan --}}
                 
                 @can('product.view')
                     <li class="sidebar-item">
@@ -93,23 +84,27 @@
                     </li>
                 @endcan
 
-                @can('gallery.view')
+                {{-- Payment Method --}}
+                @can('payment-method.view')
                     <li class="sidebar-item">
-                        <a href="{{ route('admin.gallery.index') }}" class="sidebar-link">
-                            <i class="mdi mdi-image"></i>
-                            <span class="hide-menu"> Gallery </span>
+                        <a href="{{ route('admin.payment-method.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-wallet"></i>
+                            <span class="hide-menu">Payment Method </span>
                         </a>
                     </li>
                 @endcan
+                {{-- Tour Category --}}
 
-                @can('video.view')
+                @can('tour-category.view')
                     <li class="sidebar-item">
-                        <a href="{{ route('admin.video.index') }}" class="sidebar-link">
-                            <i class="mdi mdi-video"></i>
-                            <span class="hide-menu"> Video </span>
+                        <a href="{{ route('admin.tour-category.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-arrange-send-backward"></i>
+                            <span class="hide-menu">Tour category </span>
                         </a>
                     </li>
                 @endcan
+                
+                
             </ul>
         </nav>
     </div>

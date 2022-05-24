@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\TourCategoryController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CheckoutController as AdminCheckout;
@@ -73,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('user', UserController::class);
 
         Route::resource('location', LocationController::class);
+        Route::resource('tour-category', TourCategoryController::class);
+        Route::resource('payment-method', PaymentMethodController::class);
         //admin checkout
         Route::post('checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
 

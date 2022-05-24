@@ -159,7 +159,7 @@ class UserController extends Controller
         $user = User::whereEmail($data['email'])->first();
         if (!$user) {
             $user = User::create($data);
-        //    $user->assignRole('traveler');
+            $user->assignRole('customer');
 
             Mail::to($user->email)->send(new AfterRegister($user));
         }

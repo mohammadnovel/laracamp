@@ -8,26 +8,29 @@ use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Kris\LaravelFormBuilder\FormBuilder;
-use App\Http\Requests\GalleryRequest;
-use App\Models\Gallery;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\TourRequest;
+use App\Models\Tour;
+use App\Models\TourMarketplace;
+use App\Models\TourImage;
+use App\Models\Marketplace;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class GalleryController extends Controller
+class TourController extends Controller
 {
     private $module, $model, $form;
     protected $repository;
     use XIForm;
 
-    public function __construct(Gallery $repository, FormBuilder $formBuilder)
+    public function __construct(Tour $repository, FormBuilder $formBuilder)
     {
-        $this->module = 'gallery';
-        $this->route = 'admin.gallery';
+        $this->module = 'tour';
+        $this->route = 'admin.tour';
         $this->repository = $repository;
         $this->formBuilder = $formBuilder;
-        $this->form = 'App\Forms\GalleryForm';
-        $this->path = 'arise/gallery';
+        $this->form = 'App\Forms\TourForm';
+        $this->path = 'vetours/tour';
 
         View::share('module', $this->module);
         View::share('route', $this->route);
@@ -46,15 +49,19 @@ class GalleryController extends Controller
             $data = $this->repository->orderBy('created_at', 'DESC');
 
             return DataTables::of($data)
+
+                ->addColumn('description', function ($data) {
+                    return  Str::limit(data_get($data, 'description'), 100, ' (...)');
+                })
                 ->addColumn('action', function ($data) use ($request) {
                     $buttons[] = ['type' => 'detail', 'route' => route($this->route . '.show', $data->id), 'label' => 'Detail', 'action' => 'primary', 'icon' => 'share'];
                     $buttons[] = ['type' => 'edit', 'route' => route($this->route . '.edit', $data->id), 'label' => 'Edit', 'icon' => 'edit'];
                     $buttons[] = ['type' => 'delete', 'label' => 'Delete', 'confirm' => 'Are you sure?', 'route' => route($this->route . '.destroy', $data->id)];
 
                     return $this->icon_button($buttons, true);
-                })->addColumn('image', function ($data) {
-                    return '<img src="' . data_get($data, 'image') . '" width="20%">';
-                })->rawColumns(['action', 'image', 'description'])->make();
+                })
+                ->rawColumns(['action'])
+                ->make();
         }
         return view('pages.' . $this->module . '.index');
     }
@@ -83,24 +90,41 @@ class GalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GalleryRequest $request)
+    public function store(TourRequest $request)
     {
         if (!$request->user()->can($this->module . '.create')) return notPermited();
 
+        DB::beginTransaction();
         try {
-            DB::transaction(function () use ($request) {
-                $data = $request->all();
-                if (!empty($request->image)) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
-                    $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
-                }
+            $data = $request->all();
 
-                // dd($data);
-                $post = $this->repository->create($data);
-                gilog("Create " . $this->module, $post, $data);
-            });
+            // if ($request->hasFile('image')) {
+            //     $path = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
+            //     $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $path;
+            // }
+            // if ($request->hasFile('thumbnail')) {
+            //     $path = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
+            //     $data['thumbnail'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $path;
+            // }
+
+            $post = $this->repository->create($data);
+
+
+            foreach ($data['tour_image'] as $key => $value) {
+                $storage = Storage::disk('spaces')->putFile($this->path, $value, 'public');
+
+                $data_image = [
+                    'tour_image' => $post->id,
+                    'path' => str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage
+                ];
+                TourImage::create($data_image);
+            }
+
+            gilog("Create " . $this->module, $post, $data);
+            DB::commit();
             flash('Success create ' . $this->module)->success();
         } catch (\Exception $ex) {
+            DB::rollBack();
             flash($ex->getMessage())->error();
         }
         return redirect()->route($this->route . '.index');
@@ -116,9 +140,9 @@ class GalleryController extends Controller
     {
         if (!$request->user()->can($this->module . '.view')) return notPermited();
 
-        $get = $this->repository->find($id);
+        $get = $this->repository->with('tour_category')->find($id);
         $data['detail'] = $get;
-        $detail = new Gallery();
+        $detail = new Tour();
         $data['shows'] = $detail->getFillable();
         return view('pages.' . $this->module . '.show', $data);
     }
@@ -133,13 +157,16 @@ class GalleryController extends Controller
     {
         if (!$request->user()->can($this->module . '.update')) return notPermited();
 
-        $get = $this->repository->find($id);
+        $get = $this->repository->with('tour_category')->find($id);
         $data['form'] = $this->formBuilder->create($this->form, [
             'method' => 'PUT',
             'url' => route($this->route . '.update', $id),
-            'model' => $get,
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
+            'model' => $get
         ]);
+        $data['data'] = $get;
+        $data['isEdit'] = true;
+        // dd($data);
 
         return view('pages.' . $this->module . '.create', $data);
     }
@@ -151,24 +178,39 @@ class GalleryController extends Controller
      * @param  array  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(GalleryRequest $request, $id)
+    public function update(TourRequest $request, $id)
     {
         if (!$request->user()->can($this->module . '.update')) return notPermited();
 
+        DB::beginTransaction();
         try {
-            DB::transaction(function () use ($id, $request) {
-                $data = $request->all();
-                if (!empty($request->image)) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
-                    $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+            $data = $request->all();
+            // dd($data);
+            $post = $this->repository->find($id);
+            // if ($request->hasFile('image')) {
+            //     $path = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
+            //     $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $path;
+            // }
+            if (!empty($data['tour_image'])) {
+                TourImage::whereTourId($id)->forceDelete();
+                foreach ($data['tour_image'] as $key => $value) {
+                    $storage = Storage::disk('spaces')->putFile($this->path, $value, 'public');
+    
+                    $data_image = [
+                        'tour_image' => $post->id,
+                        'path' => str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage
+                    ];
+                    TourImage::create($data_image);
                 }
+            }
 
-                $post = $this->repository->find($id);
-                $post->update($data);
-                gilog("Create " . $this->module, $post, $data);
-            });
+            $post->update($data);
+
+            gilog("Create " . $this->module, $post, $data);
+            DB::commit();
             flash('Success update ' . $this->module)->success();
         } catch (\Exception $ex) {
+            DB::rollBack();
             flash($ex->getMessage())->error();
         }
         return redirect()->route($this->route . '.index');
@@ -187,6 +229,7 @@ class GalleryController extends Controller
         try {
             DB::transaction(function () use ($id) {
                 $get = $this->repository->find($id);
+                if (count($get->tour_category) > 0) $get->tour_category()->delete();
                 $get->delete($id);
                 gilog("Delete " . $this->module, $get, ['notes' => @request('notes')]);
             });

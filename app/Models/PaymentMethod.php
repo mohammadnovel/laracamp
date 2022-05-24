@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-class Gallery extends BaseModel
+class PaymentMethod extends BaseModel
 {
     protected $fillable = [
         'id',
-        'image',
+        'name',
+        'slug',
         'description',
     ];
 

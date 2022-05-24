@@ -11,14 +11,37 @@
             <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About</a></li>
             <li class="nav-item"><a href="{{route('tour-list')}}" class="nav-link">Tour</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-            <li class="nav-item">
-                @auth
-                <span class="nav-link border-yellow-200">
-                Hi, {{Auth::user()->name}}
-                </span>
-                @endauth
-            </li>
         </ul>
+        @auth
+            <div class="d-flex user-logged nav-item dropdown no-arrow">
+                    <a href="#" role="button" class="nav-link" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Halo, {{Auth::user()->name}}!
+                       
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
+                            <li>
+                                <a href="{{route('dashboard')}}" class="dropdown-item">My Dashboard</a>
+                            </li>
+                            @if (Auth::user()->is_admin)
+                                <li>
+                                    <a href="{{route('admin.discount.index')}}" class="dropdown-item">Discount</a>
+                                </li>
+                            @endif
+                            <li>
+                                <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign Out</a>
+                                <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                </form>
+                            </li>
+                        </ul>
+                    </a>
+                </div>
+            @else
+                <div class="d-flex">
+                    <a href="{{route('login')}}" class="btn btn-outline-primary me-3">
+                        Sign In
+                    </a>
+                </div>
+            @endauth
         </div>
         
     </div>

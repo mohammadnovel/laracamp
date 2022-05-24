@@ -22,7 +22,7 @@ class AdminUserTableSeeder extends Seeder
             'is_admin' => 1
         ]);
     
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'admin']);
      
         $permissions = Permission::pluck('id','id')->all();
    

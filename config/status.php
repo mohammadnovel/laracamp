@@ -2,8 +2,9 @@
 
 return [
     'type' => [
-        1 => 'super-admin',
-        2 => 'user',
+        1 => 'admin',
+        2 => 'vendor',
+        3 => 'customer'
     ],
     'balance' => [
         0 => 'Pending',

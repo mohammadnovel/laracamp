@@ -5,30 +5,32 @@ namespace App\Http\Controllers\Admin;
 use App\Traits\XIForm;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Spatie\Permission\Models\Permission;
-use App\Http\Requests\RoleRequest;
+use App\Http\Requests\PaymentMethodRequest;
+use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class RoleController extends Controller
+class PaymentMethodController extends Controller
 {
-    private $module, $model, $form, $formRequest;
+    private $module, $model, $form;
     protected $repository;
     use XIForm;
 
-    public function __construct(Role $repository, FormBuilder $formBuilder)
+    public function __construct(PaymentMethod $repository, FormBuilder $formBuilder)
     {
-        $this->module = 'role';
-        $this->route = 'admin.role';
+        $this->module = 'payment-method';
+        $this->route = 'admin.payment-method';
         $this->repository = $repository;
         $this->formBuilder = $formBuilder;
-        $this->form = 'App\Forms\RoleForm';
-        $this->formRequest = 'App\Http\Requests\RoleRequest';
-        View::share(['module' => $this->module, 'formRequest' => $this->formRequest]);
+        $this->form = 'App\Forms\PaymentMethodForm';
+        $this->path = 'vetours/payment-method';
+
         View::share('route', $this->route);
+        View::share('module', $this->module);
     }
 
     /**
@@ -38,22 +40,20 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        // if (!$request->user()->can($this->module . '.view')) return notPermited();
+        if (!$request->user()->can($this->module . '.view')) return notPermited();
 
         if ($request->ajax()) {
-            $data = $this->repository->all();
+            $data = $this->repository->orderBy('created_at', 'DESC');
+
             return DataTables::of($data)
-                ->addColumn('action', function ($data) {
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons[] = ['type' => 'detail', 'route' => route($this->route . '.show', $data->id), 'label' => 'Detail', 'action' => 'primary', 'icon' => 'share'];
                     $buttons[] = ['type' => 'edit', 'route' => route($this->route . '.edit', $data->id), 'label' => 'Edit', 'icon' => 'edit'];
                     $buttons[] = ['type' => 'delete', 'label' => 'Delete', 'confirm' => 'Are you sure?', 'route' => route($this->route . '.destroy', $data->id)];
 
-                    return $this->icon_button($buttons);
+                    return $this->icon_button($buttons, true);
                 })
-                ->addColumn('permission', function ($data) {
-                    $collection = $data->permissions();
-                    return '<label class="label label-info">' . $collection->pluck('name')->implode('</label> <label class="label label-info">') . '</label>';
-                })
-                ->rawColumns(['permission', 'action'])
+                ->rawColumns(['action'])
                 ->make();
         }
         return view('pages.' . $this->module . '.index');
@@ -66,13 +66,14 @@ class RoleController extends Controller
      */
     public function create(Request $request)
     {
-        // if (!$request->user()->can($this->module . '.create')) return notPermited();
+        if (!$request->user()->can($this->module . '.create')) return notPermited();
 
         $data['form'] = $this->formBuilder->create($this->form, [
             'method' => 'POST',
-            'url' => route($this->route . '.store')
+            'url' => route($this->route . '.store'),
+            'enctype' => 'multipart/form-data'
         ]);
-        $data['permissions'] = Permission::all();
+
         return view('pages.' . $this->module . '.create', $data);
     }
 
@@ -82,22 +83,20 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request)
+    public function store(PaymentMethodRequest $request)
     {
-        // if (!$request->user()->can($this->module . '.create')) return notPermited();
+        if (!$request->user()->can($this->module . '.create')) return notPermited();
 
-        // try {
+        try {
             DB::transaction(function () use ($request) {
-                $data['name'] = $request->name;
+                $data = $request->all();
                 $post = $this->repository->create($data);
-                $this->assignPermission($post, $data);
-                dd($data);
-                // gilog("Create " . $this->module, $post, $data);
+                gilog("Create " . $this->module, $post, $data);
             });
             flash('Success create ' . $this->module)->success();
-        // } catch (\Exception $ex) {
-        //     flash($ex->getMessage())->error();
-        // }
+        } catch (\Exception $ex) {
+            flash($ex->getMessage())->error();
+        }
         return redirect()->route($this->route . '.index');
     }
 
@@ -107,9 +106,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if (!$request->user()->can($this->module . '.view')) return notPermited();
+
+        $get = $this->repository->find($id);
+        $data['detail'] = $get;
+        $detail = new Article();
+        $data['shows'] = $detail->getFillable();
+        return view('pages.' . $this->module . '.show', $data);
     }
 
     /**
@@ -120,16 +125,16 @@ class RoleController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        // if (!$request->user()->can($this->module . '.update')) return notPermited();
+        if (!$request->user()->can($this->module . '.update')) return notPermited();
 
         $get = $this->repository->find($id);
         $data['form'] = $this->formBuilder->create($this->form, [
             'method' => 'PUT',
             'url' => route($this->route . '.update', $id),
-            'model' => $get
+            'model' => $get,
+            'enctype' => 'multipart/form-data'
         ]);
-        $data['data'] = $get;
-        $data['permissions'] = Permission::get();
+
         return view('pages.' . $this->module . '.create', $data);
     }
 
@@ -137,23 +142,19 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  array  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, $id)
+    public function update(PaymentMethodRequest $request, $id)
     {
-        // if (!$request->user()->can($this->module . '.update')) return notPermited();
+        if (!$request->user()->can($this->module . '.update')) return notPermited();
 
         try {
             DB::transaction(function () use ($id, $request) {
-                $input = $request->only(['name']);
-                $data = $this->repository->findOrFail($id);
-                $data->fill($input)->save();
-                $permission = Permission::all();
-                $data->revokePermissionTo($permission);
-                $this->assignPermission($data, $request->permissions);
-
-                // gilog("Create " . $this->module, $data, $data);
+                $data = $request->all();
+                $post = $this->repository->find($id);
+                $post->update($data);
+                gilog("Create " . $this->module, $post, $data);
             });
             flash('Success update ' . $this->module)->success();
         } catch (\Exception $ex) {
@@ -170,15 +171,13 @@ class RoleController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        // if (!$request->user()->can($this->module . '.delete')) return notPermited('json');
+        if (!$request->user()->can($this->module . '.delete')) return notPermited('json');
 
         try {
             DB::transaction(function () use ($id) {
                 $get = $this->repository->find($id);
-                $permission = Permission::get();
-                $get->revokePermissionTo($permission);
                 $get->delete($id);
-                // gilog("Delete " . $this->module, $get, ['notes' => @request('notes')]);
+                gilog("Delete " . $this->module, $get, ['notes' => @request('notes')]);
             });
             $data['message'] = 'Success delete ' . $this->module;
             $status = 200;
@@ -187,10 +186,5 @@ class RoleController extends Controller
             $status = 500;
         }
         return response()->json($data, $status);
-    }
-
-    public function assignPermission($role, $permission)
-    {
-        $role->givePermissionTo($permission);
     }
 }
