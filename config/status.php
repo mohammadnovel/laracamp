@@ -6,6 +6,10 @@ return [
         2 => 'vendor',
         3 => 'customer'
     ],
+    'payment_method' => [
+        1 => 'manual-tf',
+        2 => 'midtrans'
+    ],
     'balance' => [
         0 => 'Pending',
         1 => 'Success',

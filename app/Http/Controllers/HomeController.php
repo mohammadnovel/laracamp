@@ -24,4 +24,9 @@ class HomeController extends Controller
     {
         return view('main.tour-list');
     }
+
+    public function tourDetail()
+    {
+        return view('main.tour-detail');
+    }
 }

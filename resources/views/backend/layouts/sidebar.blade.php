@@ -48,15 +48,6 @@
                     </li>
                 @endcan
 
-                @can('marketplace.view')
-                    <li class="sidebar-item">
-                        <a href="{{ route('admin.marketplace.index') }}" class="sidebar-link">
-                            <i class="mdi mdi-garage-open"></i>
-                            <span class="hide-menu"> Marketplace </span>
-                        </a>
-                    </li>
-                @endcan
-
                 {{-- @can('article.view')
                     <li class="sidebar-item">
                         <a href="{{ route('admin.article.index') }}" class="sidebar-link">
@@ -66,11 +57,11 @@
                     </li>
                 @endcan --}}
                 
-                @can('product.view')
+                @can('discount.view')
                     <li class="sidebar-item">
-                        <a href="{{ route('admin.product.index') }}" class="sidebar-link">
+                        <a href="{{ route('admin.discount.index') }}" class="sidebar-link">
                             <i class="mdi mdi-cube"></i>
-                            <span class="hide-menu"> Product </span>
+                            <span class="hide-menu"> Discount </span>
                         </a>
                     </li>
                 @endcan

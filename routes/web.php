@@ -34,6 +34,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('tour-list', [HomeController::class, 'tours'])->name('tour-list');
+Route::get('tour/detail', [HomeController::class, 'tourDetail'])->name('tour-detail');
 
 Route::get('login', function () {
     return view('login');
