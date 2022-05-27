@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\TourCategoryController;
 use App\Http\Controllers\Admin\PaymentMethodController;
@@ -52,6 +53,8 @@ route::get('auth/google/callback', [Users::class, 'handleProviderCallback'])->na
 Route::get('payment/success', [CheckoutController::class, 'midtransCallback']);
 Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
 //management
+
+Route::get('/contoh-pdf', [InvoiceController::class, 'generateInvoice'])->name('print');
 
 Route::middleware(['auth'])->group(function () {
     //checkout
