@@ -22,12 +22,10 @@
                             <table class="table table-striped table-hover table-bordered data-table">
                                 <thead>
                                     <tr>
-                                        <th>SKU</th>
                                         <th>Title</th>
-                                        <th>Sub Title</th>
+                                        <th>Short Description</th>
                                         <th>Description</th>
-                                        <th>Location</th>
-                                        <th>Youtube URL</th>
+                                        <th>Publish at</th>
                                         <th width="25%">Action</th>
                                     </tr>
                                 </thead>
@@ -48,26 +46,21 @@
             processing: true,
             serverSide: true,
             ajax: '{{ route($route . '.index') }}',
-            columns: [
-                {
+            columns: [{
                     data: 'title',
                     name: 'title'
                 },
                 {
-                    data: 'slug',
-                    name: 'slug'
+                    data: 'short_description',
+                    name: 'short_description'
                 },
                 {
                     data: 'description',
                     name: 'description'
                 },
                 {
-                    data: 'location',
-                    name: 'location'
-                },
-                {
-                    data: 'video',
-                    name: 'video'
+                    data: 'publish_at',
+                    name: 'publish_at'
                 },
                 {
                     data: 'action',

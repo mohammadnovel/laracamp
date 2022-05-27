@@ -27,7 +27,7 @@ class ArticleController extends Controller
         $this->repository = $repository;
         $this->formBuilder = $formBuilder;
         $this->form = 'App\Forms\ArticleForm';
-        $this->path = 'arise/article';
+        $this->path = 'vetours/article';
 
         View::share('route', $this->route);
         View::share('module', $this->module);
@@ -97,13 +97,19 @@ class ArticleController extends Controller
             DB::transaction(function () use ($request) {
                 $data = $request->all();
                 if (!empty($request->image)) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
-                    $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+                    $data['image'] = $request->file('image')->store(
+                        $this->path, //tempatnya
+                        'public' //agar public
+                    );
                 }
 
                 if (!empty($request->thumbnail)) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
-                    $data['thumbnail'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+                    // $storage = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
+                    // $data['thumbnail'] =  $storage;
+                    $data['thumbnail'] = $request->file('thumbnail')->store(
+                        $this->path, //tempatnya
+                        'public' //agar public
+                    );
                 }
 
                 $post = $this->repository->create($data);

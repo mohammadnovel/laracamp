@@ -27,10 +27,7 @@ class TourForm extends Form
             ])
             ->add('video', 'text', ['attr' => ['class' => 'form-control'], 'label' => 'Youtube URL'])
             ->add('thumbnail', 'text', ['template' => 'layouts.form.dropify', 'label' => 'Thumbnail', 'attr' => ['data-allowed-file-extensions' => 'jpg jpeg png']])
-            ->add('brochure', 'text', ['template' => 'layouts.form.dropify', 'label' => 'Brochure', 'attr' => ['data-allowed-file-extensions' => 'jpg jpeg png pdf']])
-            ->add('environment', 'textarea', ['label' => 'Environment', 'attr' => ['rows'=>10, 'class' => 'textarea-edit']])
-            ->add('history', 'textarea', ['label' => 'History', 'attr' => ['rows'=>10, 'class' => 'textarea-edit']])
-            ->add('process', 'textarea', ['label' => 'Process', 'attr' => ['rows'=>10, 'class' => 'textarea-edit']])
+            
             ->add('submit', 'submit', ['label' => 'Submit', 'attr' => ['class' => 'btn btn-success']]);
     }
 

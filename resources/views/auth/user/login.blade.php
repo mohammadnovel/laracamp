@@ -19,9 +19,9 @@
 
 <body>
 
-    <section class="login-user">
-        <div class="left">
-            <img src="{{ asset('images/ill_login_new.png') }}" alt="">
+    <section class="login-user" >
+        <div class="left" >
+            <img src="{{ asset('images/109667.png') }}" alt="">
         </div>
         <div class="right">
             <img src="{{ asset('images/logo.png') }}" class="logo" alt="">

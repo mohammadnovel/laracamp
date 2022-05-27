@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('backend.layouts.app')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -18,12 +18,7 @@
                         <hr>
                         <div class="form">
                             {!! form_start($form, ['id' => 'check-rate-form', 'class' => 'm-t-40']) !!}
-                            {!! form_row($form->sku) !!}
                             {!! form_row($form->title) !!}
-                            {!! form_row($form->sub_title) !!}
-                            {!! form_row($form->description) !!}
-                            {!! form_row($form->contact_person) !!}
-                            {!! form_row($form->location_id) !!}
                             {!! form_row($form->location) !!}
                             {!! form_row($form->video) !!}
                             {!! form_row($form->thumbnail) !!}
