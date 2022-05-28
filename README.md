@@ -1,3 +1,44 @@
+
+# Vetours 
+
+A brief description of what this project for TA
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/mohammadnovel/laracamp
+```
+
+Go to the project directory
+
+```bash
+  cd laracamp
+```
+
+Jalankan perintah
+
+```bash
+ cp .env.example .env
+```
+```bash
+ composer install
+```
+```bash
+ php artisan key:generate
+```
+```bash
+ php artisan migrate --seed
+```
+Start the server
+
+```bash
+  php artisan serve
+```
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
