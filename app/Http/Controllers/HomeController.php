@@ -10,10 +10,12 @@ class HomeController extends Controller
     public function dashboard()
     {
         switch (Auth::user()->is_admin) {
-            case true:
+            case 1:
                 return redirect(route('admin.index'));
                 break;
-            
+            case 2:
+                return redirect(route('vendor.index'));
+                break;
             default:
                 return redirect(route('user.dashboard'));
                 break;

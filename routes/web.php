@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\LocationController;
@@ -28,13 +29,14 @@ use App\Http\Controllers\Admin\DiscountController as AdminDiscount;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+Route::get('/', [MainController::class, 'index'])->name('main');
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+Route::get('article/{id}', [MainController::class, 'detailArticle'])->name('article.detail');
 
 Route::get('tour-list', [HomeController::class, 'tours'])->name('tour-list');
 Route::get('tour/detail', [HomeController::class, 'tourDetail'])->name('tour-detail');
@@ -90,6 +92,18 @@ Route::middleware(['auth'])->group(function () {
 
         //admin discount
         Route::resource('discount', AdminDiscount::class);
+    });
+
+    Route::prefix('vendor')->middleware('role:vendor')->name('vendor.')->group(function (){
+        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('index');
+        
+        Route::resource('location', LocationController::class);
+       
+        Route::resource('tour', TourController::class);
+        Route::resource('payment-method', PaymentMethodController::class);
+        //admin checkout
+        Route::post('checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
+
     });
 
 });

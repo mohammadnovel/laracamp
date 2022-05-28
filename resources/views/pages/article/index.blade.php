@@ -18,6 +18,11 @@
                             @endcan
                         </div>
                         <hr>
+                        {{-- @role('admin')
+                            I am a super-admin!
+                        @else
+                            I am not a super-admin...
+                        @endrole --}}
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered data-table">
                                 <thead>

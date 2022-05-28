@@ -22,7 +22,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">{{ ucfirst($item) }}</label>
                                         <div class="col-sm-10">
-                                            <img src="{{ $detail->{$item} }}" width="50%">
+                                            <img src="{{ Storage::url($detail->{$item}) }}" width="50%">
                                         </div>
                                     </div>
                                 @else
