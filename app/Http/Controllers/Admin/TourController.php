@@ -151,7 +151,7 @@ class TourController extends Controller
     {
         if (!$request->user()->can($this->module . '.update')) return notPermited();
 
-        $get = $this->repository->with('tour_category')->find($id);
+        $get = $this->repository->with(['tour_category', 'tour_images'])->find($id);
         $data['form'] = $this->formBuilder->create($this->form, [
             'method' => 'PUT',
             'url' => route($this->route . '.update', $id),
@@ -188,11 +188,12 @@ class TourController extends Controller
             if (!empty($data['tour_image'])) {
                 TourImage::whereTourId($id)->forceDelete();
                 foreach ($data['tour_image'] as $key => $value) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $value, 'public');
-    
+                    $name = $value->getClientOriginalName();
+                    $path = $value->storeAs($this->path, $name, 'public');
                     $data_image = [
-                        'tour_image' => $post->id,
-                        'path' => str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage
+                        'tour_id' => $post->id,
+                        // 'ordering' => $ordering,
+                        'path' => $path
                     ];
                     TourImage::create($data_image);
                 }
