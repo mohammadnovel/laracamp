@@ -93,25 +93,12 @@ class TourController extends Controller
 
         if (!$request->user()->can($this->module . '.create')) return notPermited();
 
-        // DB::beginTransaction();
-        // try {
+        DB::beginTransaction();
+        try {
             $data = $request->all();
         // dd($data);
-
-            // if ($request->hasFile('image')) {
-            //     $path = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
-            //     $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $path;
-            // }
-            // if ($request->hasFile('thumbnail')) {
-            //     $path = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
-            //     $data['thumbnail'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $path;
-            // }
             $data['slug'] = Str::slug($request->title);
             $post = $this->repository->create($data);
-            // $data['thumbnail'] = $request->file('thumbnail')->store(
-            //     $this->path, //tempatnya
-            //     'public' //agar public
-            // );
 
             foreach ($data['tour_image'] as $key => $value) {
                 // $name = time().'.'.$value->extension();
@@ -127,13 +114,13 @@ class TourController extends Controller
                 TourImage::create($data_image);
             }
 
-            gilog("Create " . $this->module, $post, $data);
-            // DB::commit();
+            // gilog("Create " . $this->module, $post, $data);
+            DB::commit();
             flash('Success create ' . $this->module)->success();
-        // } catch (\Exception $ex) {
-        //     DB::rollBack();
-        //     flash($ex->getMessage())->error();
-        // }
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            flash($ex->getMessage())->error();
+        }
         return redirect()->route($this->route . '.index');
     }
 
@@ -147,7 +134,7 @@ class TourController extends Controller
     {
         if (!$request->user()->can($this->module . '.view')) return notPermited();
 
-        $get = $this->repository->with('tour_category')->find($id);
+        $get = $this->repository->with(['tour_category', 'tour_images'])->find($id);
         $data['detail'] = $get;
         $detail = new Tour();
         $data['shows'] = $detail->getFillable();
