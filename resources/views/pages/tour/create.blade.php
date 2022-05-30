@@ -19,9 +19,12 @@
                         <div class="form">
                             {!! form_start($form, ['id' => 'check-rate-form', 'class' => 'm-t-40']) !!}
                             {!! form_row($form->title) !!}
-                            {!! form_row($form->location) !!}
+                            {!! form_row($form->description) !!}
+                            {!! form_row($form->location_id) !!}
+                            {!! form_row($form->category_id) !!}
+                            {!! form_row($form->address) !!}
+                            {!! form_row($form->price) !!}
                             {!! form_row($form->video) !!}
-                            {!! form_row($form->thumbnail) !!}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -108,29 +111,29 @@
                 $('.btn_remove_image').eq($('.btn_remove_image').index(this)).parent().parent().remove();
             });
 
-            var postURLOverview = "<?php echo url('addmore-overview'); ?>";
-            var iOverview = {{ !empty($data->id) ? $no : 0 }};
+            // var postURLOverview = "<?php echo url('addmore-overview'); ?>";
+            // var iOverview = {{ !empty($data->id) ? $no : 0 }};
 
-            $('#add-overview').click(function() {
-                iOverview++;
-                $('#dynamic_field_overview').append(
-                    `<tr class="rowComponentOverview">
-                <td>
-                    <input type="text" name="title_overview[]" class="form-control" placeholder="Title" id="">
-                </td>
-                <td>
-                    <textarea name="description_overview[]" class="form-control" placeholder="Description" cols="30" rows="3"></textarea>
-                </td>
-              <td><button type="button" name="remove" class="btn btn-danger btn_remove_overview">X</button></td>
-            </tr>`
-                );
-            });
+            // $('#add-overview').click(function() {
+            //     iOverview++;
+            //     $('#dynamic_field_overview').append(
+            //         `<tr class="rowComponentOverview">
+            //     <td>
+            //         <input type="text" name="title_overview[]" class="form-control" placeholder="Title" id="">
+            //     </td>
+            //     <td>
+            //         <textarea name="description_overview[]" class="form-control" placeholder="Description" cols="30" rows="3"></textarea>
+            //     </td>
+            //   <td><button type="button" name="remove" class="btn btn-danger btn_remove_overview">X</button></td>
+            // </tr>`
+            //     );
+            // });
 
 
-            $(document).on('click', '.btn_remove_overview', function() {
-                $('.btn_remove_overview').eq($('.btn_remove_overview').index(this)).parent().parent()
-                    .remove();
-            });
+            // $(document).on('click', '.btn_remove_overview', function() {
+            //     $('.btn_remove_overview').eq($('.btn_remove_overview').index(this)).parent().parent()
+            //         .remove();
+            // });
         });
     </script>
 @endpush

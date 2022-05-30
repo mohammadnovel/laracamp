@@ -18,29 +18,16 @@
                         <hr>
                         <div class="form form-horizontal">
                             @foreach ($shows as $item)
-                                @if (in_array($item, ['image', 'thumbnail']))
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">{{ ucfirst($item) }}</label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ $detail->{$item} }}" width="50%">
-                                        </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">{{ ucfirst($item) }}</label>
+                                    <div class="col-sm-10">
+                                        @if ($item == "logo")
+                                        <img src="{{ url($detail->{$item}) }}" alt="" srcset="">
+                                        @else
+                                        {{ $detail->{$item} }}
+                                        @endif
                                     </div>
-                                @elseif(in_array($item, ['video']))
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">{{ ucfirst($item) }}</label>
-                                        <div class="col-sm-10">
-                                            <div class="elementor-column elementor-col-50 elementor-top-column elementor-element about-video elementor-element-6d3ab39c"
-                                                data-id="6d3ab39c" data-element_type="column"
-                                                data-settings='{"background_background":"classic"}'
-                                                style="padding-top: 60px;padding-right: 20px;">
-                                                <iframe width="560" height="315" src="{{ $detail->{$item} }}"
-                                                    frameborder="0"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowfullscreen></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
+                                </div>
                             @endforeach
                         </div>
                     </div>

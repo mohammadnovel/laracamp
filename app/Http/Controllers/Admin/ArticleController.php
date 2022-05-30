@@ -178,13 +178,21 @@ class ArticleController extends Controller
                 $data = $request->all();
 
                 if (!empty($request->image)) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
-                    $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+                    // $storage = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
+                    // $data['image'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+                    $data['thumbnail'] = $request->file('thumbnail')->store(
+                        $this->path, //tempatnya
+                        'public' //agar public
+                    );
                 }
 
                 if (!empty($request->thumbnail)) {
-                    $storage = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
-                    $data['thumbnail'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+                    // $storage = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
+                    // $data['thumbnail'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage;
+                    $data['thumbnail'] = $request->file('thumbnail')->store(
+                        $this->path, //tempatnya
+                        'public' //agar public
+                    );
                 }
 
                 $post = $this->repository->find($id);

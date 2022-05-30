@@ -28,7 +28,7 @@ class TourController extends Controller
         $this->repository = $repository;
         $this->formBuilder = $formBuilder;
         $this->form = 'App\Forms\TourForm';
-        $this->path = 'vetours/tour';
+        $this->path = 'vetours/tours';
 
         View::share('module', $this->module);
         View::share('route', $this->route);
@@ -90,11 +90,13 @@ class TourController extends Controller
      */
     public function store(TourRequest $request)
     {
+
         if (!$request->user()->can($this->module . '.create')) return notPermited();
 
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
             $data = $request->all();
+        // dd($data);
 
             // if ($request->hasFile('image')) {
             //     $path = Storage::disk('spaces')->putFile($this->path, $request->image, 'public');
@@ -104,27 +106,34 @@ class TourController extends Controller
             //     $path = Storage::disk('spaces')->putFile($this->path, $request->thumbnail, 'public');
             //     $data['thumbnail'] = str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $path;
             // }
-
+            $data['slug'] = Str::slug($request->title);
             $post = $this->repository->create($data);
-
+            // $data['thumbnail'] = $request->file('thumbnail')->store(
+            //     $this->path, //tempatnya
+            //     'public' //agar public
+            // );
 
             foreach ($data['tour_image'] as $key => $value) {
-                $storage = Storage::disk('spaces')->putFile($this->path, $value, 'public');
-
+                // $name = time().'.'.$value->extension();
+                $name = $value->getClientOriginalName();
+                $path = $value->storeAs($this->path, $name, 'public');
+                // $data[] = $name; 
+                // $ordering = $key->index + 1;
                 $data_image = [
-                    'tour_image' => $post->id,
-                    'path' => str_replace('https://', 'https://' . env('DO_SPACES_BUCKET') . '.', env('DO_SPACES_ENDPOINT')) . '/' . $storage
+                    'tour_id' => $post->id,
+                    // 'ordering' => $ordering,
+                    'path' => $path
                 ];
                 TourImage::create($data_image);
             }
 
             gilog("Create " . $this->module, $post, $data);
-            DB::commit();
+            // DB::commit();
             flash('Success create ' . $this->module)->success();
-        } catch (\Exception $ex) {
-            DB::rollBack();
-            flash($ex->getMessage())->error();
-        }
+        // } catch (\Exception $ex) {
+        //     DB::rollBack();
+        //     flash($ex->getMessage())->error();
+        // }
         return redirect()->route($this->route . '.index');
     }
 

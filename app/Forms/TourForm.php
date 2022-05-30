@@ -4,30 +4,31 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 use App\Models\Location;
+use App\Models\TourCategory;
 
 class TourForm extends Form
 {
     public function buildForm()
     {
         $this
-            ->add('sku', 'text', ['attr' => ['class' => 'form-control']])
+            
             ->add('title', 'text', ['attr' => ['class' => 'form-control']])
-            ->add('sub_title', 'text', ['attr' => ['class' => 'form-control']])
             ->add('description', 'textarea', ['label' => 'Description', 'attr' => ['placeholder' => 'Description', 'rows'=>10, 'class' => 'textarea-edit']])
-            ->add('contact_person', 'text', ['attr' => ['class' => 'form-control']])
-            ->add('location', 'text', ['attr' => ['class' => 'form-control'], 'rules' => 'required',
-            'error_messages' => [
-                'contact_person.required' => 'The title field is mandatory.'
-            ]])
+            ->add('address', 'text', ['attr' => ['class' => 'form-control'], 'rules' => 'required'])
             ->add('location_id', 'choice', [
                 'choices' => $this->getLocation(),
                 'label' => 'Location',
                 'empty_value' => 'Pilih Lokasi',
                 'attr' => ['class' => 'form-control select2', 'data-type' => 'sender']
             ])
+            ->add('category_id', 'choice', [
+                'choices' => $this->getCategory(),
+                'label' => 'Tour Category',
+                'empty_value' => 'Pilih Kategori',
+                'attr' => ['class' => 'form-control select2', 'data-type' => 'sender']
+            ])
+            ->add('price', 'number', ['attr' => ['class' => 'form-control'], 'label' => 'Harga Tour'])
             ->add('video', 'text', ['attr' => ['class' => 'form-control'], 'label' => 'Youtube URL'])
-            ->add('thumbnail', 'text', ['template' => 'layouts.form.dropify', 'label' => 'Thumbnail', 'attr' => ['data-allowed-file-extensions' => 'jpg jpeg png']])
-            
             ->add('submit', 'submit', ['label' => 'Submit', 'attr' => ['class' => 'btn btn-success']]);
     }
 
@@ -36,6 +37,16 @@ class TourForm extends Form
         $locations = Location::get();
         $data = [];
         foreach ($locations as $key => $value) {
+            $data[$value->id] = $value->name;
+        }
+        return $data;
+    }
+
+    public function getCategory()
+    {
+        $categories = TourCategory::get();
+        $data = [];
+        foreach ($categories as $key => $value) {
             $data[$value->id] = $value->name;
         }
         return $data;

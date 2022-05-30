@@ -22,10 +22,10 @@
                             <table class="table table-striped table-hover table-bordered data-table">
                                 <thead>
                                     <tr>
-                                        <th>SKU</th>
-                                        <th>Title</th>
-                                        <th>Sub Title</th>
-                                        <th>Description</th>
+                                        <th>title</th>
+                                        <th>description</th>
+                                        <th>price</th>
+                                        <th>status</th>
                                         <th>Location</th>
                                         <th>Youtube URL</th>
                                         <th width="25%">Action</th>
@@ -54,16 +54,20 @@
                     name: 'title'
                 },
                 {
-                    data: 'slug',
-                    name: 'slug'
-                },
-                {
                     data: 'description',
                     name: 'description'
                 },
                 {
-                    data: 'location',
-                    name: 'location'
+                    data: 'price',
+                    name: 'price'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'address',
+                    name: 'address'
                 },
                 {
                     data: 'video',

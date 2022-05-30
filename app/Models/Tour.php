@@ -4,12 +4,13 @@ namespace App\Models;
 
 class Tour extends BaseModel
 {
+    
     protected $fillable = [
         'id',
         'title',
         'slug',
         'price',
-        'location',
+        'address',
         'description',
         'location_id',
         'thumbnail',
@@ -26,7 +27,7 @@ class Tour extends BaseModel
 
     public function tour_category()
     {
-        return $this->hasMany('App\Models\TourCategory');
+        return $this->belongsTo('App\Models\TourCategory');
     }
 
     public function location()

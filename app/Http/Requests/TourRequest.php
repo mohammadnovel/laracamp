@@ -25,8 +25,6 @@ class TourRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'name' => 'required',
-            'slug' => 'required',
             'description' => 'required'
         ];
     }
