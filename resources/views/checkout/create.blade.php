@@ -12,104 +12,163 @@
     </div>
 </div>
 <section class="ftco-section">
-<div class="container">
-    <div class="col-md-12 mb-4">
-      <div class="card mb-4">
-        <div class="card-header py-3">
-          <h5 class="mb-0">Biling details</h5>
-        </div>
-        <div class="card-body">
-          <form>
-            <!-- 2 column grid layout with text inputs for the first and last names -->
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input type="text" id="form7Example1" class="form-control" />
-                  <label class="form-label" for="form7Example1">First name</label>
+    <div class="container">
+        {{-- <div class="py-5 text-center">
+          
+          <h2>Checkout form</h2>
+          <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+        </div> --}}
+      
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your orders</span>
+                <span class="badge badge-secondary badge-pill"></span>
+                </h4>
+                <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 class="my-0">{{$camp->title}}</h6>
+                    <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil consectetur fuga, tempore qui nobis doloremque adipisci iusto aut cum quod? Sequi molestiae odio obcaecati, tenetur quos rerum officia saepe odit.</small>
+                    </div>
+                    <span class="text-muted">{{$camp->price}}</span>
+                </li>
+                
+                </ul>
+        
+                <form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code">
+                    {{-- <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div> --}}
                 </div>
-              </div>
-              <div class="col">
-                <div class="form-outline">
-                  <input type="text" id="form7Example2" class="form-control" />
-                  <label class="form-label" for="form7Example2">Last name</label>
+                </form>
+            </div>
+          <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Checkouts {{$camp->title}}</h4>
+            <form class="needs-validation" novalidate>
+                
+                <div class="mb-3">
+                    <label for="name">Full Name</label>
+                    <input name="name" type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" value="{{Auth::user()->name}}" required />
+                    @if ($errors->has('name'))
+                        <p class="text-danger">{{$errors->first('name')}}</p>
+                    @endif
                 </div>
-              </div>
+
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" value="{{Auth::user()->email}}" required />
+                    @if ($errors->has('email'))
+                        <p class="text-danger">{{$errors->first('email')}}</p>
+                    @endif
+                </div>
+        
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                    <div class="invalid-feedback">
+                    Please enter your shipping address.
+                    </div>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                </div>
+        
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                    <label for="country">Country</label>
+                    <select class="custom-select d-block w-100" id="country" required>
+                        <option value="">Choose...</option>
+                        <option>United States</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid country.
+                    </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                    <label for="state">State</label>
+                    <select class="custom-select d-block w-100" id="state" required>
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                    <label for="zip">Zip</label>
+                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Zip code required.
+                    </div>
+                    </div>
+                </div>
+                {{-- <hr class="mb-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="same-address">
+                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                </div> --}}
+                <hr class="mb-4">
+        
+                <h4 class="mb-3">Payment</h4>
+        
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                    <input id="midtrans" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                    <label class="custom-control-label" for="midtrans">Midtrans</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                    <input id="transfer" name="paymentMethod" type="radio" class="custom-control-input" required>
+                    <label class="custom-control-label" for="transfer">Transfer Bank</label>
+                    </div>
+                    
+                </div>
+                {{-- <div class="row">
+                    <div class="col-md-6 mb-3">
+                    <label for="cc-name">Name on card</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                    <small class="text-muted">Full name as displayed on card</small>
+                    <div class="invalid-feedback">
+                        Name on card is required
+                    </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    <label for="cc-number">Credit card number</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Credit card number is required
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                    <label for="cc-expiration">Expiration</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Expiration date required
+                    </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                    <label for="cc-cvv">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Security code required
+                    </div>
+                    </div>
+                </div> --}}
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                </form>
             </div>
-  
-            <!-- Text input -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form7Example3" class="form-control" />
-              <label class="form-label" for="form7Example3">Company name</label>
             </div>
-  
-            <!-- Text input -->
-            <div class="form-outline mb-4">
-              <input type="text" id="form7Example4" class="form-control" />
-              <label class="form-label" for="form7Example4">Address</label>
-            </div>
-  
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="form7Example5" class="form-control" />
-              <label class="form-label" for="form7Example5">Email</label>
-            </div>
-  
-            <!-- Number input -->
-            <div class="form-outline mb-4">
-              <input type="number" id="form7Example6" class="form-control" />
-              <label class="form-label" for="form7Example6">Phone</label>
-            </div>
-  
-            <!-- Message input -->
-            <div class="form-outline mb-4">
-              <textarea class="form-control" id="form7Example7" rows="4"></textarea>
-              <label class="form-label" for="form7Example7">Additional information</label>
-            </div>
-  
-            <!-- Checkbox -->
-            {{-- <div class="form-check d-flex justify-content-center mb-2">
-              <input class="form-check-input me-2" type="checkbox" value="" id="form7Example8" checked />
-              <label class="form-check-label" for="form7Example8">
-                Create an account?
-              </label>
-            </div> --}}
-          </form>
         </div>
-      </div>
-    </div>
-  
-    <div class="col-md-12 mb-4">
-      <div class="card mb-4">
-        <div class="card-header py-3">
-          <h5 class="mb-0">Summary</h5>
-        </div>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-              Products
-              <span>$53.98</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-              Shipping
-              <span>Gratis</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-              <div>
-                <strong>Total amount</strong>
-                <strong>
-                  <p class="mb-0">(including VAT)</p>
-                </strong>
-              </div>
-              <span><strong>$53.98</strong></span>
-            </li>
-          </ul>
-  
-          <button type="button" class="btn btn-primary btn-lg btn-block">
-            Make purchase
-          </button>
-        </div>
-      </div>
-    </div>
-</div>
 </section>
 @endsection
