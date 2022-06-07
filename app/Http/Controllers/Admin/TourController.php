@@ -224,7 +224,7 @@ class TourController extends Controller
         try {
             DB::transaction(function () use ($id) {
                 $get = $this->repository->find($id);
-                if (count($get->tour_category) > 0) $get->tour_category()->delete();
+                // if (count($get->tour_category) > 0) $get->tour_category()->delete();
                 $get->delete($id);
                 gilog("Delete " . $this->module, $get, ['notes' => @request('notes')]);
             });

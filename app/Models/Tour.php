@@ -27,7 +27,7 @@ class Tour extends BaseModel
 
     public function tour_category()
     {
-        return $this->belongsTo('App\Models\TourCategory');
+        return $this->belongsTo('App\Models\TourCategory','category_id', 'id');
     }
 
     public function location()

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Checkout;
+use App\Models\Tour;
 use Auth;
+
 class HomeController extends Controller
 {
     public function dashboard()
@@ -24,7 +26,10 @@ class HomeController extends Controller
 
     public function tours()
     {
-        return view('main.tour-list');
+        $tours = Tour::query()
+        ->with(['tour_images','location','tour_category'])
+        ->orderBy('created_at', 'desc')->paginate(12);
+        return view('main.tour-list', compact('tours'));
     }
 
     public function tourDetail()
