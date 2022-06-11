@@ -72,8 +72,8 @@ Route::middleware(['auth'])->group(function () {
 
     
 
-    Route::prefix('user/dashboard')->namespace('User')->name('user.')->group(function(){
-        Route::get('/', [UserDashboard::class, 'index'])->name('dashboard');
+    Route::prefix('user')->namespace('User')->name('user.')->group(function(){
+        Route::get('/dashboard', [UserDashboard::class, 'index'])->name('dashboard');
     });
 
     Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function (){

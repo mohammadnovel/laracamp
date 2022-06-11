@@ -4,6 +4,7 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">
                 </li>
+                @role('admin')
 
                 <li class="sidebar-item mt-2">
                     <a class="sidebar-link waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false">
@@ -134,6 +135,23 @@
                         </ul>
                     </li>
                 @endcan
+                @endrole
+
+                @role('customer')
+                <li class="sidebar-item mt-2">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ route('dashboard') }}" aria-expanded="false">
+                        <i class="icon-Car-Wheel"></i>
+                        <span class="hide-menu">Dashboard </span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item mt-2">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ route('dashboard') }}" aria-expanded="false">
+                        <i class="icon-Car-Wheel"></i>
+                        <span class="hide-menu">Request Vendor </span>
+                    </a>
+                </li>
+                @endrole
             </ul>
         </nav>
     </div>

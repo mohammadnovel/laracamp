@@ -70,6 +70,13 @@ class CheckoutController extends Controller
         $user->address = $data['address'];
         $user->save();
 
+        // checkout discount
+        if ($request->discount) {
+            $discount = Discount::whereCode($request->discount)->first();
+            $data['discount_id'] = $discount->id;
+            $data['discount_percentage'] = $discount->percentage;
+        }
+
         $checkout = Checkout::create($data);
         $this->getSnapRedirect($checkout);
 
@@ -154,6 +161,23 @@ class CheckoutController extends Controller
             'name' => "Payment for {$checkout->Camp->title}."
         ];
 
+        $discountPrice = 0;
+        if ($checkout->Discount) {
+            $discountPrice = $price * $checkout->discount_percentage / 100;
+            $item_details[] = [
+                'id' => $checkout->Discount->code,
+                'price' => -$discountPrice,
+                'quantity' => 1,
+                'name' => "Discount {$checkout->Discount->name} ({$checkout->discount_percentage}%)"
+            ];
+        }
+
+        $total = $price - $discountPrice;
+        $transaction_details = [
+            'order_id' => $orderId,
+            'gross_amount' => $total
+        ];
+
         $userData = [
             'first_name' => $checkout->User->name,
             'last_name' => "",
@@ -180,9 +204,10 @@ class CheckoutController extends Controller
         ];
 
         try {
-            // get snap payment page
+            // Get Snap Payment Page URL
             $paymentUrl = \Midtrans\Snap::createTransaction($midtrans_params)->redirect_url;
             $checkout->midtrans_url = $paymentUrl;
+            $checkout->total = $total;
             $checkout->save();
 
             return $paymentUrl;
