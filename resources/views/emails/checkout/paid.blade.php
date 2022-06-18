@@ -4,7 +4,7 @@
 Hi {{$checkout->User->name}}.
 
 <br>
-Your transaction has been confirmed, now you can enjoy the benefit of <b>{{$checkcout->Camp->title}}</b>, and enjoy your Healing.
+Your transaction has been confirmed, now you can enjoy the benefit of <b>{{$checkcout->Tour->title}}</b>, and enjoy your Healing.
 
 @component('mail::button', ['url' => route('user.dashboard')])
 My Dashboard

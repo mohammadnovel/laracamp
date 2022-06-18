@@ -23,7 +23,7 @@ class MainController extends Controller
      */
     public function index()
     {
-        $tours = Tour::all();
+        $tours = Tour::with(['tour_images','tour_category'])->orderBy('created_at', 'desc')->limit(4)->get();
         $articles = Article::orderBy('created_at', 'desc')->limit(4)->get();
         return view('welcome', compact(
             'tours',

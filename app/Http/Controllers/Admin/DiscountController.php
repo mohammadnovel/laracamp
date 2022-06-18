@@ -90,6 +90,7 @@ class DiscountController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 $data = $request->all();
+                $data['type'] = "precentage";
                 $post = $this->repository->create($data);
                 gilog("Create " . $this->module, $post, $data);
             });
@@ -112,7 +113,7 @@ class DiscountController extends Controller
 
         $get = $this->repository->find($id);
         $data['detail'] = $get;
-        $detail = new Article();
+        $detail = new Discount();
         $data['shows'] = $detail->getFillable();
         return view('pages.' . $this->module . '.show', $data);
     }

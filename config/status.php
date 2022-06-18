@@ -8,7 +8,12 @@ return [
     ],
     'payment_method' => [
         1 => 'manual-tf',
-        2 => 'midtrans'
+        2 => 'midtrans',
+        2 => 'offline'
+    ],
+    'discount' => [
+        1 => 'precentage',
+        2 => 'value'
     ],
     'balance' => [
         0 => 'Pending',

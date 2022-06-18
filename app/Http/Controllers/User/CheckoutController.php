@@ -7,7 +7,8 @@ use App\Models\Checkout;
 use Illuminate\Http\Request;
 use App\Mail\Checkout\AfterCheckout;
 use App\Http\Requests\User\Checkout\Store;
-use App\Models\Camp;
+use App\Models\Tour;
+use App\Models\Discount;
 use Auth;
 use Mail;
 use Str;
@@ -38,14 +39,14 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Camp $camp, Request $request)
+    public function create(Tour $tour, Request $request)
     {
-        if ($camp->isRegistered) {
-            $request->session()->flash('error', "You already registered on {$camp->title} camp.");
+        if ($tour->isRegistered) {
+            $request->session()->flash('error', "You already registered on {$tour->title} tour.");
             return redirect(route('user.dashboard'));
         }
         return view('checkout.create', [
-            'camp' => $camp
+            'tour' => $tour
         ]);
     }
 
@@ -55,11 +56,14 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Store $request, Camp $camp)
+    public function store(Request $request, Tour $tour)
     {
         $data = $request->all();
         $data['user_id'] = Auth::id();
-        $data['camp_id'] = $camp->id;
+        $data['tour_id'] = $tour->id;
+        $data['payment_method_id'] = 1;
+        // $data['departured'] = $request->departured;
+        // dd($data);
 
         // update user data
         $user = Auth::user();
@@ -74,7 +78,7 @@ class CheckoutController extends Controller
         if ($request->discount) {
             $discount = Discount::whereCode($request->discount)->first();
             $data['discount_id'] = $discount->id;
-            $data['discount_percentage'] = $discount->percentage;
+            $data['discount_percentage'] = $discount->value;
         }
 
         $checkout = Checkout::create($data);
@@ -145,25 +149,25 @@ class CheckoutController extends Controller
     public function getSnapRedirect(Checkout $checkout)
     {
         $orderId = $checkout->id.'-'.Str::random(5);   
-        $price = $checkout->Camp->price;
+        $subtotal = $checkout->Tour->price;
 
         $checkout->midtrans_booking_code = $orderId;
 
         $transaction_details = [
             'order_id' => $orderId,
-            'gross_amount' => $price
+            'gross_amount' => $subtotal
         ];
 
         $item_details[] = [
             'id' => $orderId,
-            'price' => $price,
+            'price' => $subtotal,
             'quantity' => 1,
-            'name' => "Payment for {$checkout->Camp->title}."
+            'name' => "Payment for {$checkout->Tour->title}."
         ];
 
         $discountPrice = 0;
         if ($checkout->Discount) {
-            $discountPrice = $price * $checkout->discount_percentage / 100;
+            $discountPrice = $subtotal * $checkout->value / 100;
             $item_details[] = [
                 'id' => $checkout->Discount->code,
                 'price' => -$discountPrice,
@@ -172,7 +176,7 @@ class CheckoutController extends Controller
             ];
         }
 
-        $total = $price - $discountPrice;
+        $total = $subtotal - $discountPrice;
         $transaction_details = [
             'order_id' => $orderId,
             'gross_amount' => $total

@@ -3,7 +3,7 @@
 @section('content')
 <section class="checkout">
     <div class="container">
-        <div class="row text-center">
+        <div class="row text-center pb-8">
             <div class="col-lg-12 col-12">
                 <img src="{{ asset('images/ill_register.png') }}" height="400" class="mb-5" alt=" ">
             </div>

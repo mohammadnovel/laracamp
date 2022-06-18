@@ -10,16 +10,35 @@ class Checkout extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id','camp_id','payment_status','midtrans_url','midtrans_booking_code'];
+    protected $fillable = [
+    'user_id',
+    'tour_id',
+    'payment_status',
+    'midtrans_url',
+    'midtrans_booking_code',
+    'payment_method_id',
+    'proof_payment',
+    'discount_id',
+    'discount_total',
+    'subtotal',
+    'total_people',
+    'total',
+    'departured'
+    ];
 
     // public function setExpiredAttribute($value)
     // {
     //    $this->attributes['expired'] = date('Y-m-t', strtotime($value));
     // }
 
-    public function Camp()
+    // public function Camp()
+    // {
+    //     return $this->belongsTo(Camp::class);
+    // }
+
+    public function Tour()
     {
-        return $this->belongsTo(Camp::class);
+        return $this->belongsTo(Tour::class);
     }
 
     public function User()

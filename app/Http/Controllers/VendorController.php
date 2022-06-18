@@ -8,26 +8,26 @@ use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Kris\LaravelFormBuilder\FormBuilder;
-use App\Http\Requests\PaymentMethodRequest;
-use App\Models\PaymentMethod;
+use App\Http\Requests\VendorRequest;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class PaymentMethodController extends Controller
+class VendorController extends Controller
 {
     private $module, $model, $form;
     protected $repository;
     use XIForm;
 
-    public function __construct(PaymentMethod $repository, FormBuilder $formBuilder)
+    public function __construct(Vendor $repository, FormBuilder $formBuilder)
     {
-        $this->module = 'payment-method';
-        $this->route = 'admin.payment-method';
+        $this->module = 'vendor-request';
+        $this->route = 'admin.vendor-request';
         $this->repository = $repository;
         $this->formBuilder = $formBuilder;
-        $this->form = 'App\Forms\PaymentMethodForm';
-        $this->path = 'vetours/payment-method';
+        $this->form = 'App\Forms\VendorForm';
+        $this->path = 'vetours/vendor-request';
 
         View::share('route', $this->route);
         View::share('module', $this->module);
@@ -83,7 +83,7 @@ class PaymentMethodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PaymentMethodRequest $request)
+    public function store(VendorRequest $request)
     {
         if (!$request->user()->can($this->module . '.create')) return notPermited();
 
@@ -112,7 +112,7 @@ class PaymentMethodController extends Controller
 
         $get = $this->repository->find($id);
         $data['detail'] = $get;
-        $detail = new PaymentMethod();
+        $detail = new Vendor();
         $data['shows'] = $detail->getFillable();
         return view('pages.' . $this->module . '.show', $data);
     }
@@ -145,7 +145,7 @@ class PaymentMethodController extends Controller
      * @param  array  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PaymentMethodRequest $request, $id)
+    public function update(VendorRequest $request, $id)
     {
         if (!$request->user()->can($this->module . '.update')) return notPermited();
 

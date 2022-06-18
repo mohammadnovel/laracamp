@@ -24,14 +24,14 @@
                         </td>
                         <td>
                             <p class="mb-2">
-                                <strong>{{$checkout->Camp->title}}</strong>
+                                <strong>{{$checkout->Tour->title}}</strong>
                             </p>
                             <p>
                                 {{$checkout->created_at->format('M d, Y')}}
                             </p>
                         </td>
                         <td>
-                            <strong>${{$checkout->Camp->price}}</strong>
+                            <strong>${{$checkout->Tour->price}}</strong>
                         </td>
                         <td>
                             <strong>{{$checkout->payment_status}}</strong>
@@ -42,7 +42,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="https://wa.me/083819751818?text=Hi, Saya ingin bertanya tentang kelas {{$checkout->Camp->title}}" class="btn btn-primary">
+                            <a href="https://wa.me/083819751818?text=Hi, Saya ingin bertanya tentang kelas {{$checkout->Tour->title}}" class="btn btn-primary">
                                 Get Invoice
                             </a>
                         </td>

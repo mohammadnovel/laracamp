@@ -29,7 +29,7 @@ class Paid extends Mailable
      */
     public function build()
     {
-        return $this->subject("Your Transaction Has Been Confirmed: {$this->checkout->Camp->title} ")->markdown('emails.checkout.paid', [
+        return $this->subject("Your Transaction Has Been Confirmed: {$this->checkout->Tour->title} ")->markdown('emails.checkout.paid', [
             'checkout' => $this->checkout
         ]);
     }

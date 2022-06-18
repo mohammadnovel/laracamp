@@ -27,7 +27,6 @@ class DiscountRequest extends FormRequest
             'name' => 'required|string',
             'code' => 'required|string|max:5|unique:discounts',
             'description' => 'required',
-            'type' => 'required|string',
             'value' => 'required|string|numeric',
         ];
     }

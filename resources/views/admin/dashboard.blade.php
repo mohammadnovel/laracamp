@@ -2,45 +2,75 @@
 
 @section('content')
 
-<div class="container my-5">
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="card mt-3">
-                <div class="card-header">
-                    Dashboard Camp
+<div class="container-fluid">
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg bg-danger">
+                            <i class="ti-clipboard text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Tour
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">{{ $tour }}</h2>
+                    </div>
                 </div>
-                <div class="card-body">
-                    @include('components.alert')
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>User</td>
-                                <td>Camp</td>
-                                <td>Price</td>
-                                <td>Register Data</td>
-                                <td>Paid Status</td>
-                                <td>Action</td>
-                            </tr>
-                        </thead>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg btn-info">
+                            <i class="ti-wallet text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Booking
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">{{ $checkouts }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg bg-success">
+                            <i class="ti-calendar text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Customer
 
-                        <tbody>
-                            @forelse ($checkouts as $checkout)
-                                <tr>
-                                    <td>{{$checkout->User->name}}</td>
-                                    <td>{{$checkout->Camp->title}}</td>
-                                    <td>{{$checkout->Camp->price}}</td>
-                                    <td>{{$checkout->created_at->format('M d Y')}}</td>
-                                    <td>
-                                        <strong>{{$checkout->payment_status}}</strong>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3">No Data. </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">{{ $customer }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="m-r-10">
+                        <span class="btn btn-circle btn-lg bg-warning">
+                            <i class="mdi mdi-map text-white"></i>
+                        </span>
+                    </div>
+                    <div>
+                        Total Locatioin
+
+                    </div>
+                    <div class="ml-auto">
+                        <h2 class="m-b-0 font-light">{{ $location }}</h2>
+                    </div>
                 </div>
             </div>
         </div>

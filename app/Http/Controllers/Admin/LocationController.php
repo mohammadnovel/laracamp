@@ -112,7 +112,7 @@ class LocationController extends Controller
 
         $get = $this->repository->find($id);
         $data['detail'] = $get;
-        $detail = new Article();
+        $detail = new Location();
         $data['shows'] = $detail->getFillable();
         return view('pages.' . $this->module . '.show', $data);
     }

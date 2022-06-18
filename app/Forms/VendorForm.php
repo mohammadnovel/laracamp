@@ -4,15 +4,14 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 
-class DiscountForm extends Form
+class VendorForm extends Form
 {
     public function buildForm()
     {
         $this
-            ->add('name', 'text', ['attr' => ['class' => 'form-control']])
-            ->add('code', 'text', ['attr' => ['class' => 'form-control']])
-            ->add('description', 'textarea', ['attr' => ['class' => 'form-control']])
-            ->add('value', 'numeric', ['attr' => ['class' => 'form-control']])
+            ->add('nik', 'numeric', ['attr' => ['class' => 'form-control']])
+            ->add('description', 'textarea', ['label' => 'Description', 'attr' => ['placeholder' => 'Description', 'rows'=>10, 'class' => 'textarea-edit']])
+            ->add('file', 'text', ['template' => 'layouts.form.dropify', 'label' => 'Image', 'attr' => ['data-allowed-file-extensions' => 'jpg jpeg png']])
 
             // ->add('type', 'choice', [
             //     'choices' => $this->getDiscount(),

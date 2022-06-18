@@ -112,7 +112,7 @@ class TourCategoryController extends Controller
 
         $get = $this->repository->find($id);
         $data['detail'] = $get;
-        $detail = new Article();
+        $detail = new TourCategory();
         $data['shows'] = $detail->getFillable();
         return view('pages.' . $this->module . '.show', $data);
     }

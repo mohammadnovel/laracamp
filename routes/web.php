@@ -63,8 +63,8 @@ Route::get('/contoh-pdf', [InvoiceController::class, 'generateInvoice'])->name('
 Route::middleware(['auth'])->group(function () {
     //checkout
     Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
-    Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
-    Route::post('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('checkout/{tour:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
+    Route::post('checkout/{tour}', [CheckoutController::class, 'store'])->name('checkout.store');
 
     //dashboard
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
