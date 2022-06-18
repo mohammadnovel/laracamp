@@ -15,7 +15,7 @@
 <section class="ftco-section ftco-degree-bg">
     <div class="container">
       <div class="row">
-          <div class="col-lg-3 sidebar ftco-animate">
+          {{-- <div class="col-lg-3 sidebar ftco-animate">
               <div class="sidebar-wrap bg-light ftco-animate">
                   <h3 class="heading mb-4">Find City</h3>
                   <form action="#">
@@ -93,13 +93,13 @@
                             </div>
                           </form>
               </div>
-        </div>
-        <div class="col-lg-9">
+        </div> --}}
+        <div class="col-lg-12">
             <div class="row">
                 @foreach ($tours as $tour)
                 <div class="col-md-4 ftco-animate">
                     <div class="destination">
-                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{Storage::url($tour->thumbnail)}}');">
+                        <a href="{{route('checkout.create', $tour->slug)}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{Storage::url($tour->thumbnail)}}');">
                             <div class="icon d-flex justify-content-center align-items-center">
                         <span class="icon-search2"></span>
                     </div>

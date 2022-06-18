@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="checkout">
+<section class="checkout" style="padding-top: 10%;padding-bottom: 5%;">
     <div class="container">
         <div class="row text-center pb-8">
             <div class="col-lg-12 col-12">

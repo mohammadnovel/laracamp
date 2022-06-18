@@ -9,7 +9,7 @@
                     DASHBOARD
                 </p>
                 <h2 class="primary-header ">
-                    My Journey Visits
+                    My History Bookeed
                 </h2>
             </div>
         </div>
@@ -27,11 +27,12 @@
                                 <strong>{{$checkout->Tour->title}}</strong>
                             </p>
                             <p>
-                                {{$checkout->created_at->format('M d, Y')}}
+                                {{ Carbon\Carbon::parse($checkout->departured)->format('d-m-Y') }}
                             </p>
                         </td>
                         <td>
-                            <strong>${{$checkout->Tour->price}}</strong>
+
+                            <strong>Rp. {{number_format($checkout->total, 0, '', '.')}}</strong>
                         </td>
                         <td>
                             <strong>{{$checkout->payment_status}}</strong>
@@ -42,7 +43,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="https://wa.me/083819751818?text=Hi, Saya ingin bertanya tentang kelas {{$checkout->Tour->title}}" class="btn btn-primary">
+                            <a href="{{route('get-invoice', $checkout->id)}}" class="btn btn-primary">
                                 Get Invoice
                             </a>
                         </td>

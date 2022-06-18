@@ -11,7 +11,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $checkout = Checkout::with('camp')->whereUserId(Auth::id())->get();
+        $checkout = Checkout::with('tour')->whereUserId(Auth::id())
+        ->orderBy('departured','DESC')->get();
 
         return view('user.dashboard', [
             'checkouts' => $checkout

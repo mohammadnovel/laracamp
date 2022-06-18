@@ -58,7 +58,7 @@ Route::get('payment/success', [CheckoutController::class, 'midtransCallback']);
 Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
 //management
 
-Route::get('/contoh-pdf', [InvoiceController::class, 'generateInvoice'])->name('print');
+Route::get('/download-invoice-pdf/{id}', [InvoiceController::class, 'generateInvoice'])->name('get-invoice');
 
 Route::middleware(['auth'])->group(function () {
     //checkout

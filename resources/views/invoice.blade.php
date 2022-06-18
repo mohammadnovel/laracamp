@@ -112,9 +112,8 @@
 								</td>
 
 								<td>
-									Invoice #: 123<br />
-									Created: {{$date}}<br />
-									Due: February 1, 2015
+									Invoice #: INV-{{$checkout->midtrans_booking_code}}/{{$checkout->created_at}}<br />
+									Created: {{$checkout->created_at}}<br />
 								</td>
 							</tr>
 						</table>
@@ -132,9 +131,8 @@
 								</td>
 
 								<td>
-									Acme Corp.<br />
-									John Doe<br />
-									john@example.com
+									{{$checkout->user->name}}<br />
+									{{$checkout->user->email}}
 								</td>
 							</tr>
 						</table>
@@ -148,9 +146,9 @@
 				</tr>
 
 				<tr class="details">
-					<td colspan="2">Check</td>
+					<td colspan="2">{{$checkout->payment_method->name}}</td>
 
-					<td colspan="2">1000</td>
+					<td colspan="2">{{$checkout->total}}</td>
 				</tr>
 
 				<tr class="heading">
@@ -161,20 +159,30 @@
 				</tr>
 
 				<tr class="item">
-					<td>Tour Bromo</td>
-					<td>10%</td>
-					<td>Rp. 300.000</td>
-					<td>Rp. 270.000</td>
+					<td>{{$checkout->Tour->title}}</td>
+					<td>{!! !empty($checkout->discount_total) ? $checkout->discount_total : '-' !!}
+					</td>
+					<td>Rp. {{number_format($checkout->Tour->price, 0, '', '.')}}</td>
+					<td>Rp. {{number_format($checkout->sub_total, 0, '', '.')}}</td>
 				</tr>
 
 				
 
 				<tr class="total">
-					<td colspan="3"></td>
+					<td ></td>
 
-					<td>Total: Rp. 270.000</td>
+					<td colspan="3">Total: Rp. {{number_format($checkout->sub_total, 0, '', '.')}}</td>
 				</tr>
 			</table>
+			@if ($checkout->status == "paid")
+				<h1>{{$checkout->status}}</h1>
+			@else
+				<div class="row">
+					<h2>Note : </h2>
+					<p>Harap dibayarkan melalui link berikut : <a href="{{$checkout->midtrans_url}}">Klik Disini</a></p>
+				</div>
+			@endif
+			
 		</div>
 	</body>
 </html>

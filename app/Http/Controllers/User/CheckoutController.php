@@ -149,25 +149,25 @@ class CheckoutController extends Controller
     public function getSnapRedirect(Checkout $checkout)
     {
         $orderId = $checkout->id.'-'.Str::random(5);   
-        $subtotal = $checkout->Tour->price;
+        $sub_total = $checkout->Tour->price;
 
         $checkout->midtrans_booking_code = $orderId;
 
         $transaction_details = [
             'order_id' => $orderId,
-            'gross_amount' => $subtotal
+            'gross_amount' => $sub_total
         ];
 
         $item_details[] = [
             'id' => $orderId,
-            'price' => $subtotal,
+            'price' => $sub_total,
             'quantity' => 1,
             'name' => "Payment for {$checkout->Tour->title}."
         ];
 
         $discountPrice = 0;
         if ($checkout->Discount) {
-            $discountPrice = $subtotal * $checkout->value / 100;
+            $discountPrice = $sub_total * $checkout->value / 100;
             $item_details[] = [
                 'id' => $checkout->Discount->code,
                 'price' => -$discountPrice,
@@ -176,7 +176,7 @@ class CheckoutController extends Controller
             ];
         }
 
-        $total = $subtotal - $discountPrice;
+        $total = $sub_total - $discountPrice;
         $transaction_details = [
             'order_id' => $orderId,
             'gross_amount' => $total
@@ -211,6 +211,8 @@ class CheckoutController extends Controller
             // Get Snap Payment Page URL
             $paymentUrl = \Midtrans\Snap::createTransaction($midtrans_params)->redirect_url;
             $checkout->midtrans_url = $paymentUrl;
+            $checkout->sub_total = $sub_total;
+            $checkout->discount_total = $discountPrice;
             $checkout->total = $total;
             $checkout->save();
 
