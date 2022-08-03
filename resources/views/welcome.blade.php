@@ -14,7 +14,7 @@
                   <div class="textfield-search one-third">
                   	<input type="text" class="form-control" placeholder="Ex: camp, backpacker, trail running">
                   </div>
-                  <div class="select-wrap one-third">
+                  {{-- <div class="select-wrap one-third">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                     <select name="" id="" class="form-control" placeholder="Keyword search">
                       <option value="">Where</option>
@@ -23,7 +23,7 @@
                       <option value="">Lodon United Kingdom</option>
                       <option value="">Paris Italy</option>
                     </select>
-                  </div>
+                  </div> --}}
                 </div>
                 <input type="submit" class="search-submit btn btn-primary" value="Search">  
               </form>
@@ -192,7 +192,7 @@
 				@foreach ($tours as $tour)
 				<div class="col-sm col-md-6 col-lg ftco-animate">
     				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{asset('frontend/images/destination-1.jpg')}});">
+    					<a href="{{route('checkout.create', $tour->slug)}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{Storage::url($tour->thumbnail)}}');">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -200,7 +200,7 @@
     					<div class="text p-3">
     						<div class="d-flex">
     							<div class="one">
-		    						<h3><a href="#">{{$tour->title}}</a></h3>
+		    						<h3><a href="{{route('checkout.create', $tour->slug)}}">{{$tour->title}}</a></h3>
 		    						{{-- <p class="rate">
 		    							<i class="icon-star"></i>
 		    							<i class="icon-star"></i>
@@ -224,8 +224,8 @@
     						<p class="days"><span>2 days 3 nights</span></p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
+    							<span><i class="icon-map-o"></i> {{$tour->address}}</span> 
+    							<span class="ml-auto"><a href="#">{{$tour->tour_category->name}}</a></span>
     						</p>
     					</div>
     				</div>

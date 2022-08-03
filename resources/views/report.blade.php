@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Invoice </title>
+		<title>Report Bulanan </title>
 
 		<style>
 			.invoice-box {
@@ -112,8 +112,8 @@
 								</td>
 
 								<td>
-									Invoice #: INV-{{$checkout->midtrans_booking_code}}/{{$checkout->created_at}}<br />
-									Created: {{$checkout->created_at}}<br />
+									Report #: <br />
+									Created: {{$date}}<br />
 								</td>
 							</tr>
 						</table>
@@ -129,59 +129,39 @@
 									Jl. Koramil<br />
 									Cicurug, Sukabumi 43359.
 								</td>
-
-								<td>
-									{{$checkout->user->name}}<br />
-									{{$checkout->user->email}}
-								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 
-				<tr class="heading">
-					<td colspan="2">Payment Method</td>
-                    
-					<td colspan="2">Check #</td>
-				</tr>
-
-				<tr class="details">
-					<td colspan="2">{{$checkout->payment_method->name}}</td>
-
-					<td colspan="2"> Rp. {{number_format($checkout->total, 0, '', '.')}}</td>
-				</tr>
 
 				<tr class="heading">
-					<td>Detail</td>
-					<td>Discount</td>
-					<td>Price</td>
-					<td>Subtotal</td>
+					<td>Nama</td>
+					<td>Paket Wisata</td>
+					<td>Tanggal</td>
+					<td>status</td>
+					<td>Harga</td>
 				</tr>
-
+				@foreach ($checkouts as $checkout)
 				<tr class="item">
-					<td>{{$checkout->Tour->title}}</td>
-					<td>{!! !empty($checkout->discount_total) ? $checkout->discount_total : '-' !!}
+					<td>{{$checkout->User->name}}</td>
+					<td>{{$checkout->Tour->title}}
 					</td>
-					<td>Rp. {{number_format($checkout->Tour->price, 0, '', '.')}}</td>
+					<td>{{date('d-m-Y', strtotime($checkout->departured));}} 
+					</td>
+					<td>{{$checkout->payment_status}} 
+					</td>
 					<td>Rp. {{number_format($checkout->sub_total, 0, '', '.')}}</td>
 				</tr>
-
-				
-
+				@endforeach
 				<tr class="total">
 					<td ></td>
 
-					<td colspan="3">Total: Rp. {{number_format($checkout->sub_total, 0, '', '.')}}</td>
+					<td colspan="3">Total: Rp. {{number_format($total_all, 0, '', '.')}}</td>
 				</tr>
+
 			</table>
-			@if ($checkout->status == "paid")
-				<h1>{{$checkout->status}}</h1>
-			@else
-				<div class="row">
-					<h2>Note : </h2>
-					<p>Harap dibayarkan melalui link berikut : <a href="{{$checkout->midtrans_url}}">Klik Disini</a></p>
-				</div>
-			@endif
+			
 			
 		</div>
 	</body>

@@ -65,11 +65,12 @@
                         </span>
                     </div>
                     <div>
-                        Total Locatioin
+                        Total Report : {{ $checkouts }}
 
                     </div>
                     <div class="ml-auto">
-                        <h2 class="m-b-0 font-light">{{ $location }}</h2>
+                        <a href="{{ route('get-report') }}" type="button" class="btn btn-outline-primary" >Download Report All</a>
+
                     </div>
                 </div>
             </div>

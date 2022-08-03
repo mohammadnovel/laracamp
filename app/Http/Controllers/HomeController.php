@@ -24,13 +24,27 @@ class HomeController extends Controller
         }
     }
 
-    public function tours()
+    public function tours(Request $request)
     {
         $tours = Tour::query()
         ->with(['tour_images','location','tour_category'])
         ->orderBy('created_at', 'desc')->paginate(12);
         return view('main.tour-list', compact('tours'));
     }
+
+    // public function tourSearch(Request $request)
+    // {
+    //     $tours = Tour::query()
+    //     ->with(['tour_images','location','tour_category'])
+    //     ->whereTitle($request->search)
+    //     ->orderBy('created_at', 'desc')
+    //     ->paginate(12)
+    //     ->get();
+
+    //     return view('main.tour-list', compact('tours'));
+
+        
+    // }
 
     public function tourDetail()
     {

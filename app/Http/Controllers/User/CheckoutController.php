@@ -271,6 +271,7 @@ class CheckoutController extends Controller
         }
 
         $checkout->save();
+        // dd($checkout);
         return view('checkout/success');
     }
 }

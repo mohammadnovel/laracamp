@@ -107,7 +107,7 @@
                         <div class="text p-3">
                             <div class="d-flex">
                                 <div class="one">
-                                    <h3><a href="#">{{$tour->location->name}}</a></h3>
+                                    <h3><a href="{{route('checkout.create', $tour->slug)}}">{{$tour->title}}</a></h3>
                                     {{-- <p class="rate">
                                         <i class="icon-star"></i>
                                         <i class="icon-star"></i>

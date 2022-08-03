@@ -9,6 +9,7 @@ use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\reportController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\TourCategoryController;
@@ -39,6 +40,7 @@ Route::get('/about', function () {
 Route::get('article/{id}', [MainController::class, 'detailArticle'])->name('article.detail');
 
 Route::get('tour-list', [HomeController::class, 'tours'])->name('tour-list');
+// Route::get('tour-list', [HomeController::class, 'tourSearch'])->name('tour-search');
 Route::get('tour/detail', [HomeController::class, 'tourDetail'])->name('tour-detail');
 
 Route::get('login', function () {
@@ -59,6 +61,7 @@ Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
 //management
 
 Route::get('/download-invoice-pdf/{id}', [InvoiceController::class, 'generateInvoice'])->name('get-invoice');
+Route::get('/download-report-pdf', [reportController::class, 'getReport'])->name('get-report');
 
 Route::middleware(['auth'])->group(function () {
     //checkout
