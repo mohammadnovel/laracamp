@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="{{route('main')}}">VeTours.</a>
+        <a class="navbar-brand" href="{{route('main')}}">Green Traveler</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
         </button>
@@ -9,10 +9,14 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="{{route('main')}}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="{{route('tour-list')}}" class="nav-link">Tour</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Activities</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Accommodation</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Places</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Destination</a></li>
+            {{-- <li class="nav-item"><a href="{{route('tour-list')}}" class="nav-link">Tour</a></li> --}}
             <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
         </ul>
-        @auth
+        {{-- @auth
             <div class="d-flex user-logged nav-item dropdown no-arrow">
                     <a href="#" role="button" class="nav-link" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Halo, {{Auth::user()->name}}!
@@ -41,7 +45,7 @@
                         Sign In
                     </a>
                 </div>
-            @endauth
+        @endauth --}}
         </div>
         
     </div>

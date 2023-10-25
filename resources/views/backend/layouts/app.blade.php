@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('main/images/logo.png') }}">
-    <title>Vetours</title>
+    <title>Green Traveler</title>
     <!-- Custom CSS -->
     {{-- <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet" type="text/css">
@@ -96,7 +96,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Vetours
+                All Rights Reserved by Green Traveler
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

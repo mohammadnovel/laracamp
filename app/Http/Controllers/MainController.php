@@ -25,6 +25,7 @@ class MainController extends Controller
     {
         $tours = Tour::with(['tour_images','tour_category'])->orderBy('created_at', 'desc')->limit(4)->get();
         $articles = Article::orderBy('created_at', 'desc')->limit(4)->get();
+        // dd($tours);
         return view('welcome', compact(
             'tours',
             'articles',

@@ -23,7 +23,7 @@
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <h3 class="text-white mt-3">Vetours</h3>
+                    <h3 class="text-white mt-3">Green Traveler</h3>
                 </span>
             </a>
             <!-- ============================================================== -->
