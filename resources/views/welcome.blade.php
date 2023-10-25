@@ -574,7 +574,7 @@
           
           <div class="col-md-3 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('frontend/images/image_2.jpg')}}');">
+              <a href="#" class="block-20" style="background-image: url('{{asset('frontend/images/eco-1.jpeg')}}');">
               </a>
               <div class="text p-4">
               	<span class="tag">Culture</span>
@@ -590,7 +590,7 @@
           </div>
           <div class="col-md-3 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('frontend/images/image_3.jpg')}}');">
+              <a href="#" class="block-20" style="background-image: url('{{asset('frontend/images/eco-2.jpeg')}}');">
               </a>
               <div class="text p-4">
               	<span class="tag">Tips, Travel</span>
@@ -608,7 +608,7 @@
           </div>
           <div class="col-md-3 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('frontend/images/image_4.jpg')}}');">
+              <a href="#" class="block-20" style="background-image: url('{{asset('frontend/images/eco-3.jpeg')}}');">
               </a>
               <div class="text p-4">
               	<span class="tag">Tips, Travel</span>
@@ -626,7 +626,7 @@
           </div>
 		  <div class="col-md-3 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{asset('frontend/images/image_4.jpg')}}');">
+              <a href="#" class="block-20" style="background-image: url('{{asset('frontend/images/eco-4.jpeg')}}');">
               </a>
               <div class="text p-4">
               	<span class="tag">Tips, Travel</span>
